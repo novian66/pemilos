@@ -85,7 +85,8 @@
                                     </div>
                                 </div>
                                 <div class="d-flex mt-1 mb-0">
-                                    <a href="{{ route('election.view', ['id' => $data->id, 'election_id' => $elec->id])}}" class="card-btn">
+                                    <a href="{{ route('election.view', ['id' => $data->id, 'election_id' => $elec->id]) }}"
+                                        class="card-btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted"
                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                             stroke="currentColor" fill="none" stroke-linecap="round"
@@ -156,78 +157,87 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-body p-4 text-center">
-                                    <span class="avatar avatar-xl mb-3 avatar-rounded"
-                                        style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                    <h3 class="m-0 mb-1"><a href="#">SMAN 1 Laravel</a></h3>
-                                    <div class="text-muted">Bergabung Pada</div>
-                                    <div class="mt-3">
-                                        <span class="badge bg-purple-lt">28/08/2022</span>
+                        @forelse ($user as $user_join)
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body p-4 text-center">
+                                        <span class="avatar avatar-xl mb-3 avatar-rounded"
+                                            style="background-image: url(./static/avatars/000m.jpg)"></span>
+                                        <h3 class="m-0 mb-1">{{ $user_join->user->name}}</h3>
+                                        <div class="text-muted">{{ $user_join->user->email }}</div>
+                                        <div class="mt-3">
+                                            <span class="badge bg-purple-lt">{{ $user_join->status}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <a href="#" class="card-btn text-danger">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/phone -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-danger"
+                                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <line x1="4" y1="7" x2="20" y2="7">
+                                                </line>
+                                                <line x1="10" y1="11" x2="10" y2="17">
+                                                </line>
+                                                <line x1="14" y1="11" x2="14" y2="17">
+                                                </line>
+                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                            </svg>
+                                            Delete
+                                        </a>
                                     </div>
                                 </div>
-                                <div class="d-flex">
-                                    <a href="#" class="card-btn text-danger">
-                                        <!-- Download SVG icon from http://tabler-icons.io/i/phone -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-danger"
-                                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <line x1="4" y1="7" x2="20" y2="7"></line>
-                                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                        </svg>
-                                        Delete
-                                    </a>
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <ul class="pagination ">
-                            <li class="page-item page-prev disabled">
 
-                            </li>
-                            <li class="page-item page-next">
+                            {{-- paginate --}}
+                            <div class="mt-4">
                                 <ul class="pagination ">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                            <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <polyline points="15 6 9 12 15 18"></polyline>
-                                            </svg>
-                                            prev
-                                        </a>
+                                    <li class="page-item page-prev disabled">
+
                                     </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">
-                                            next
-                                            <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <polyline points="9 6 15 12 9 18"></polyline>
-                                            </svg>
-                                        </a>
+                                    <li class="page-item page-next">
+                                        <ul class="pagination ">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <polyline points="15 6 9 12 15 18"></polyline>
+                                                    </svg>
+                                                    prev
+                                                </a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#">
+                                                    next
+                                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <polyline points="9 6 15 12 9 18"></polyline>
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
-                            </li>
-                        </ul>
+                            </div>
+                        @empty
+                            @include('layouts.theme.empty')
+                        @endforelse
                     </div>
                 </div>
             </div>

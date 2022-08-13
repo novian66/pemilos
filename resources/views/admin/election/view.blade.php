@@ -85,9 +85,10 @@
                 </div>
                 <div class="col-md-7">
                     <div class="card p-2 shadow-sm rounded">
-                        <form action="{{ route('election.create', $data->id) }}" method="POST"
+                        <form action="{{ route('election.update', ['id' => $school->id, 'election_id' => $data->id]) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            @method("PATCH")
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3 ">

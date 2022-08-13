@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    Edit School : 
+    Edit School : {{ $data->nama }}
 @endsection
 
 @section('content')
@@ -9,12 +9,13 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-body">
-                        <form action="{{ route('school.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('school.update', $data->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method("PATCH")
                             <div class="row">
                                 <div class="col-md-5">
-                                    <img id="blah" src="{{ asset('dist/img/noimage.png') }}" alt="logo school image"
-                                        class="img-fluid">
+                                    <img id="blah" src="{{ asset('dist/img/logo/' . $data->logo) }}"
+                                        alt="logo school image" class="img-fluid">
                                 </div>
                                 <div class="col-md-7">
                                     <div class="row">
@@ -24,7 +25,7 @@
                                                 <div>
                                                     <input type="text"
                                                         class="form-control @error('nama') is-invalid @enderror"
-                                                        value="{{ old('nama') }}" name="nama">
+                                                        value="{{ $data->nama }}" name="nama">
                                                     @error('nama')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -39,7 +40,7 @@
                                                 <div>
                                                     <input type="number"
                                                         class="form-control @error('phone') is-invalid @enderror"
-                                                        value="{{ old('phone') }}" name="phone">
+                                                        value="{{ $data->phone }}" name="phone">
                                                     @error('phone')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -68,7 +69,7 @@
                                                 <div>
                                                     <input type="email"
                                                         class="form-control @error('email') is-invalid @enderror"
-                                                        value="{{ old('email') }}" name="email">
+                                                        value="{{ $data->email }}" name="email">
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -80,8 +81,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Address School</label>
-                                        <textarea class="form-control @error('address') is-invalid @enderror" name="address"
-                                            name="example-textarea-input" rows="2" placeholder="Content..">{{ old('address') }}</textarea>
+                                        <textarea class="form-control @error('address') is-invalid @enderror" name="address" name="example-textarea-input"
+                                            rows="2" placeholder="Content..">{{ $data->adress }}</textarea>
                                         @error('address')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -91,8 +92,13 @@
                                     <div class="mb-3">
                                         <div class="form-label">Status School</div>
                                         <label class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox">
-                                            <span class="form-check-label">Active</span>
+                                            @if ($data->status == 'active')
+                                                <input class="form-check-input" type="checkbox" checked>
+                                                <span class="form-check-label">Active</span>
+                                            @else
+                                                <input class="form-check-input" type="checkbox">
+                                                <span class="form-check-label">Disable</span>
+                                            @endif
                                         </label>
                                     </div>
                                     <div class="form-footer">

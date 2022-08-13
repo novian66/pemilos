@@ -35,7 +35,7 @@ class ElectionSchoolController extends Controller
             'deskripsi' => 'required',
             'start' => 'required',
             'end' => 'required',
-            'image' => 'required'
+            'image' => 'required|image|mimes:png,jpg'
         ]);
 
         $status = 'disable';
@@ -78,8 +78,67 @@ class ElectionSchoolController extends Controller
         $candidate = ElectionSchoolCandidate::where([
             'school_id' => $school->id,
             'election_school_id' => $data->id
-        ])->orderBy('urutan', 'DESC')->get();
+        ])->orderBy('urutan', 'ASC')->get();
 
         return view('admin.election.view', compact('data', 'school', 'candidate'));
+    }
+
+    public function update($id, $election_id, Request $request)
+    {
+        $school = School::find($id);
+        if (empty($school)) {
+            # code...
+            return redirect()->route('school.index')->with('error', 'School Not Found');
+        }
+
+        $election = ElectionSchool::find($election_id);
+        if (empty($election)) {
+            # code...
+            return redirect()->route('school.index')->with('error', 'School Not Found');
+        }
+
+        $request->validate([
+            'title' => 'required',
+            'deskripsi' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'image' => 'image|mimes:png,jpg'
+        ]);
+
+        $status = 'disable';
+        if ($request->status == "on") {
+            # code...
+            $status = 'enable';
+        }
+
+        if ($request->image) {
+            # code...
+            unlink(public_path('dist/img/election' . $election->image));
+
+            $ImageName = time() . '.' . $request->image->extension();
+
+            $election->update([
+                'school_id' => $school->id,
+                'title' => $request->title,
+                'deskripsi' => $request->deskripsi,
+                'start' => $request->start,
+                'end' => $request->end,
+                'image' => $ImageName,
+                'status' => $status
+            ]);
+
+            $request->image->move(public_path('dist/img/election/'), $ImageName);
+        }
+
+        $election->update([
+            'school_id' => $school->id,
+            'title' => $request->title,
+            'deskripsi' => $request->deskripsi,
+            'start' => $request->start,
+            'end' => $request->end,
+            'status' => $status
+        ]);
+
+        return redirect()->route('election.view', ['id' => $school->id, 'election_id' => $election->id])->with('success', 'Election Hass Been Update');
     }
 }
