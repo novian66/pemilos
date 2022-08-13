@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('', [App\Http\Controllers\User\DashoardController::class, 'index'])->name('dashboard');
 
 // kpu only route
 Route::prefix('school')->middleware('auth')->group(function () {
