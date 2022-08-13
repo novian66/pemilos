@@ -23,7 +23,7 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="row">
-               
+               @include('layouts.theme.empty')
             </div>
         </div>
     </div>
