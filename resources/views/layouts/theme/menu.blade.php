@@ -66,7 +66,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {{ (request()->segment(1) == 'users') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('dashboard')}}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
@@ -83,8 +83,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./docs/index.html">
+                <li class="nav-item {{ (request()->segment(1) == 'settings') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('settings')}}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
