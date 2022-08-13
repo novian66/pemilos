@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('settingsas', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
+Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
 
 // kpu only route
 Route::prefix('school')->middleware('auth')->group(function () {
@@ -55,5 +55,13 @@ Route::prefix('users')->middleware('auth')->group(function () {
     Route::get('', [App\Http\Controllers\User\DashoardController::class, 'index'])->name('dashboard');
     Route::post('', [App\Http\Controllers\User\DashoardController::class, 'joinSchool'])->name('user.joinSchool');
     Route::patch('', [App\Http\Controllers\User\DashoardController::class, 'editProfile'])->name('user.editProfile');
-    Route::get('/school/{id}', [App\Http\Controllers\User\DashoardController::class, 'showSchoolEvent'])->name('user.school');
+    Route::post('school', [App\Http\Controllers\User\DashoardController::class, 'showSchoolEvent'])->name('user.event');
+});
+
+
+Route::prefix('vote')->middleware('auth')->group(function() {
+    Route::get('', [App\Http\Controllers\User\VoteController::class, 'index'])->name('vote.index');
+    Route::post('', [App\Http\Controllers\User\VoteController::class, 'store'])->name('vote.verify');
+    // Route::get('/{id}', [App\Http\Controllers\User\VoteController::class, 'show'])->name('vote.show');
+    // Route::patch('/{id}', [App\Http\Controllers\User\VoteController::class, 'update'])->name('vote.update');
 });
