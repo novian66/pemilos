@@ -113,7 +113,7 @@
                                     <div class="form-group mb-3 ">
                                         <label class="form-label">Start Election</label>
                                         <div>
-                                            <input type="text"
+                                            <input type="date" min="{{date('Y-m-d')}}"
                                                 class="form-control @error('start') is-invalid @enderror"
                                                 value="{{ $data->start }}" name="start" id="datetime">
                                             @error('start')
@@ -141,7 +141,7 @@
                                     <div class="form-group mb-3 ">
                                         <label class="form-label">Finish Election</label>
                                         <div>
-                                            <input type="text" class="form-control @error('end') is-invalid @enderror"
+                                            <input type="date" min="{{date('Y-m-d')}}" class="form-control @error('end') is-invalid @enderror"
                                                 value="{{ $data->end }}" name="end" id="datetime">
                                             @error('end')
                                                 <span class="invalid-feedback" role="alert">

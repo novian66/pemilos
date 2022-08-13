@@ -11,4 +11,9 @@ class ElectionSchool extends Model
     protected $fillable = [
         'school_id', 'title', 'deskripsi', 'start', 'end', 'status', 'token', 'image'
     ];
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

@@ -23,10 +23,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
+Route::get('quickcount', [App\Http\Controllers\QuickcountController::class, 'index'])->name('quickcount');
+Route::get('quickcount/{token}', [App\Http\Controllers\QuickcountController::class, 'quickcount'])->name('hasil');
 
 // kpu only route
 Route::prefix('school')->middleware('auth')->group(function () {
-    // school 
+    // school
     Route::get('', [App\Http\Controllers\Admin\SchoolController::class, 'index'])->name('school.index');
     Route::get('create', [App\Http\Controllers\Admin\SchoolController::class, 'create'])->name('school.create');
     Route::post('create', [App\Http\Controllers\Admin\SchoolController::class, 'store'])->name('school.store');
@@ -43,7 +45,7 @@ Route::prefix('school')->middleware('auth')->group(function () {
     // candidate election
     Route::get('view/{id}/election/{election_id}/candidate', [App\Http\Controllers\Admin\CandidateElectionController::class, 'create'])->name('candidate.create');
     Route::post('view/{id}/election/{election_id}/candidate', [App\Http\Controllers\Admin\CandidateElectionController::class, 'store'])->name('candidate.store');
-    
+
     // edit and delete school
     Route::get('edit/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'edit'])->name('school.edit');
     Route::patch('edit/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'update'])->name('school.update');
@@ -53,4 +55,7 @@ Route::prefix('school')->middleware('auth')->group(function () {
 
 Route::prefix('users')->middleware('auth')->group(function () {
     Route::get('', [App\Http\Controllers\User\DashoardController::class, 'index'])->name('dashboard');
+    Route::post('', [App\Http\Controllers\User\DashoardController::class, 'joinSchool'])->name('user.joinSchool');
+    Route::patch('', [App\Http\Controllers\User\DashoardController::class, 'editProfile'])->name('user.editProfile');
+    Route::get('/school/{id}', [App\Http\Controllers\User\DashoardController::class, 'showSchoolEvent'])->name('user.school');
 });

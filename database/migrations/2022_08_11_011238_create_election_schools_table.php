@@ -21,8 +21,8 @@ return new class extends Migration
 
             $table->string('title');
             $table->text('deskripsi');
-            $table->dateTime('start');
-            $table->dateTime('end');
+            $table->date('start');
+            $table->date('end');
             $table->string('token');
             $table->enum('status', ['enable', 'disable']);
             $table->string('image');
