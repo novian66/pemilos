@@ -25,7 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
 
 Route::get('quickcount', [App\Http\Controllers\QuickcountController::class, 'index'])->name('quickcount');
-Route::get('quickcount/{token}', [App\Http\Controllers\QuickcountController::class, 'quickcount'])->name('hasil');
+Route::post('quickcount', [App\Http\Controllers\QuickcountController::class, 'quickcount'])->name('hasil');
 
 
 // kpu only route
