@@ -14,7 +14,7 @@
                 aria-label="Open user menu">
                 <span class="avatar avatar-sm">UA</span>
                 <div class="d-none d-xl-block ps-2">
-                    <div>{{ auth()->user()->name }}</div>
+                    <div>{{ auth()->user()->name ?? '' }}</div>
                     <div class="mt-1 small text-muted">Role : {{ auth()->user()->getRoleNames()[0] }}</div>
                 </div>
             </a>

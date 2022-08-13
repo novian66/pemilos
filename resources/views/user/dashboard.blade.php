@@ -39,7 +39,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <a href="{{ route('user.school', $item->school_id) }}" class="card-btn">
+                                        <a href="#" class="card-btn" data-bs-toggle="modal" data-bs-target="#modal-token">
                                             <!-- Download SVG icon from http://tabler-icons.io/i/mail -->
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted"
                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -123,6 +123,8 @@
         </div>
     </div>
 
+
+    {{-- Modal Join --}}
     <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -135,6 +137,33 @@
                         @csrf
                         <div class="form-group mb-3 ">
                             <label class="form-label">Masukan Token Sekolah</label>
+                            <div>
+                                <input type="text" class="form-control" name="token" aria-describedby="emailHelp"
+                                    placeholder="Enter Your Token">
+                            </div>
+                        </div>
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-secondary w-100">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Verifikasi --}}
+    <div class="modal modal-blur fade" id="modal-token" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Akses Kegiatan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('user.event') }}" method="POST">
+                        @csrf
+                        <div class="form-group mb-3 ">
+                            <label class="form-label">Masukan Token Kegiatan</label>
                             <div>
                                 <input type="text" class="form-control" name="token" aria-describedby="emailHelp"
                                     placeholder="Enter Your Token">

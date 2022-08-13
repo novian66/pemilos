@@ -56,13 +56,12 @@ class DashoardController extends Controller
         return redirect()->route('dashboard')->with('success', 'Sukses!');
     }
 
-    public function showSchoolEvent($id)
+    public function showSchoolEvent(Request $request)
     {
-        $school = School::find($id);
-        if (empty($school)) {
-            return redirect()->route('dashboard')->with('error', 'Sekolah tidak ditemukan!');
+        $event = ElectionSchool::where('token', $request->token)->first();
+        if (empty($event)) {
+            return redirect()->route('dashboard')->with('error', 'Token Salah!');
         }
-        $election_candidate = ElectionSchool::where('school_id', $school->id)->get();
-        return view('user.election', ['data' => $election_candidate]);
+        return view('user.election', compact('event'))->with('success', 'Sukses!');
     }
 }
