@@ -5,7 +5,8 @@
 
 @section('button-header')
     <div class="btn-list">
-        <a href="{{ route('election.create', $data->id) }}" class="btn btn-danger d-none d-sm-inline-block">
+        <a onclick="event.preventDefault(); document.getElementById('hapus-election').submit();"
+            class="btn btn-danger d-none d-sm-inline-block">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                 stroke-linejoin="round">
@@ -18,6 +19,9 @@
             </svg>
             Delete
         </a>
+        <form id="hapus-election" action="{{ route('election.destroy', ['id' => $school->id, 'election_id' => $data->id]) }}" method="POST" class="d-none">
+            @csrf @method('DELETE')
+        </form>
     </div>
 @endsection
 
@@ -85,10 +89,10 @@
                 </div>
                 <div class="col-md-7">
                     <div class="card p-2 shadow-sm rounded">
-                        <form action="{{ route('election.update', ['id' => $school->id, 'election_id' => $data->id]) }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('election.update', ['id' => $school->id, 'election_id' => $data->id]) }}"
+                            method="POST" enctype="multipart/form-data">
                             @csrf
-                            @method("PATCH")
+                            @method('PATCH')
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3 ">

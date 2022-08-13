@@ -15,7 +15,8 @@
             </svg>
             Edit School
         </a>
-        <a href="{{ route('election.create', $data->id) }}" class="btn btn-danger d-none d-sm-inline-block">
+        <a onclick="event.preventDefault(); document.getElementById('hapus-school').submit();"
+            class="btn btn-danger d-none d-sm-inline-block">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                 stroke-linejoin="round">
@@ -28,6 +29,9 @@
             </svg>
             Delete
         </a>
+        <form id="hapus-school" action="{{ route('school.destroy', $data->id) }}" method="POST" class="d-none">
+            @csrf @method('DELETE')
+        </form>
     </div>
 @endsection
 
@@ -55,7 +59,7 @@
                             </a>
                         </div>
                     </div>
-                    @foreach ($election as $elec)
+                    @forelse ($election as $elec)
                         <div class="mt-3">
                             <div class="card card-sm">
                                 <div class="card-body">
@@ -99,7 +103,8 @@
                                         </svg>
                                         View
                                     </a>
-                                    <a href="#" class="card-btn text-danger">
+                                    <a class="card-btn text-danger"
+                                        onclick="event.preventDefault(); document.getElementById('hapus-election-{{ $elec->id }}').submit();">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-danger"
                                             width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                             stroke="currentColor" fill="none" stroke-linecap="round"
@@ -113,14 +118,23 @@
                                         </svg>
                                         Delete
                                     </a>
+                                    <form id="hapus-election-{{ $elec->id }}"
+                                        action="{{ route('election.destroy', ['id' => $data->id, 'election_id' => $elec->id]) }}"
+                                        method="POST" class="d-none">
+                                        @csrf @method('DELETE')
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="mt-3">
+                            @include('layouts.theme.empty')
+                        </div>
+                    @endforelse
                 </div>
                 <div class="col-md-7">
                     <div class="card p-2 shadow-sm rounded">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-right">
                             <button data-bs-toggle="modal" data-bs-target="#add-user"
                                 class="btn btn-secondary d-none d-sm-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
@@ -133,27 +147,6 @@
                                 </svg>
                                 Add User
                             </button>
-                            <form action="" method="GET">
-                                <div class="row g-2">
-                                    <div class="col">
-                                        <input type="text" class="form-control" placeholder="Cari Pengguna">
-                                    </div>
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn btn-white btn-icon" aria-label="Button">
-                                            <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <circle cx="10" cy="10" r="7"></circle>
-                                                <line x1="21" y1="21" x2="15" y2="15">
-                                                </line>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -163,10 +156,10 @@
                                     <div class="card-body p-4 text-center">
                                         <span class="avatar avatar-xl mb-3 avatar-rounded"
                                             style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                        <h3 class="m-0 mb-1">{{ $user_join->user->name}}</h3>
+                                        <h3 class="m-0 mb-1">{{ $user_join->user->name }}</h3>
                                         <div class="text-muted">{{ $user_join->user->email }}</div>
                                         <div class="mt-3">
-                                            <span class="badge bg-purple-lt">{{ $user_join->status}}</span>
+                                            <span class="badge bg-purple-lt">{{ $user_join->status }}</span>
                                         </div>
                                     </div>
                                     <div class="d-flex">
@@ -194,46 +187,7 @@
 
                             {{-- paginate --}}
                             <div class="mt-4">
-                                <ul class="pagination ">
-                                    <li class="page-item page-prev disabled">
-
-                                    </li>
-                                    <li class="page-item page-next">
-                                        <ul class="pagination ">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <polyline points="15 6 9 12 15 18"></polyline>
-                                                    </svg>
-                                                    prev
-                                                </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">
-                                                    next
-                                                    <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <polyline points="9 6 15 12 9 18"></polyline>
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                {!! $user->links() !!}
                             </div>
                         @empty
                             @include('layouts.theme.empty')

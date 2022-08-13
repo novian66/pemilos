@@ -141,4 +141,24 @@ class ElectionSchoolController extends Controller
 
         return redirect()->route('election.view', ['id' => $school->id, 'election_id' => $election->id])->with('success', 'Election Hass Been Update');
     }
+
+    public function destroy($id, $election_id)
+    {
+
+        $school = School::find($id);
+        if (empty($school)) {
+            # code...
+            return redirect()->route('school.index')->with('error', 'School Not Found');
+        }
+
+        $election = ElectionSchool::find($election_id);
+        if (empty($election)) {
+            # code...
+            return redirect()->route('school.index')->with('error', 'School Not Found');
+        }
+
+        unlink(public_path('dist/img/election/'. $election->image));
+        $election->delete();
+        return redirect()->route('school.view', $school->id)->with('success', 'Election Hass Been Deleted');
+    }
 }

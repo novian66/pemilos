@@ -122,4 +122,17 @@ class SchoolController extends Controller
 
         return redirect()->route('school.view', $data->id)->with('success', 'School Hass Been Update');
     }
+
+    public function destroy($id) 
+    {
+        $data = School::find($id);
+        if (empty($data)) {
+            # code...
+            return redirect()->route('school.index')->with('error', 'Data School Not Found');
+        }
+
+        unlink(public_path('dist/img/logo/' . $data->logo));
+        $data->delete();
+        return redirect()->route('school.index')->with('success', 'Data School Hass Been Deleted');
+    }
 }

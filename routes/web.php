@@ -27,16 +27,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // kpu only route
 Route::prefix('school')->middleware('auth')->group(function () {
+    // school 
     Route::get('', [App\Http\Controllers\Admin\SchoolController::class, 'index'])->name('school.index');
     Route::get('create', [App\Http\Controllers\Admin\SchoolController::class, 'create'])->name('school.create');
     Route::post('create', [App\Http\Controllers\Admin\SchoolController::class, 'store'])->name('school.store');
     Route::get('view/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'view'])->name('school.view');
+    Route::delete('view/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'destroy'])->name('school.destroy');
 
     // election
     Route::get('view/{id}/election', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'create'])->name('election.create');
     Route::post('view/{id}/election', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'store'])->name('election.store');
     Route::get('view/{id}/election/{election_id}/view', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'view'])->name('election.view');
     Route::patch('view/{id}/election/{election_id}/view', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'update'])->name('election.update');
+    Route::delete('view/{id}/election/{election_id}/delete', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'destroy'])->name('election.destroy');
 
     // candidate election
     Route::get('view/{id}/election/{election_id}/candidate', [App\Http\Controllers\Admin\CandidateElectionController::class, 'create'])->name('candidate.create');
