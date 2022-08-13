@@ -25,4 +25,8 @@ class UserJoinSchool extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 }

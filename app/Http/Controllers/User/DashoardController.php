@@ -53,6 +53,6 @@ class DashoardController extends Controller
             return redirect()->route('dashboard')->with('error', 'Sekolah tidak ditemukan!');
         }
         $election_candidate = ElectionSchool::where('school_id', $school->id)->get();
-        return view('user.school', compact('school'));
+        return view('user.election', ['data' => $election_candidate]);
     }
 }
