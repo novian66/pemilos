@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class SchoolController extends Controller
 {
+    function __construct()
+    {
+        // $this->middleware('permission:school-access', ['only' => [
+        //     'index', 'create', 'store', 'view', 'edit', 'update', 'destroy'
+        // ]]);
+    }
+
     public function index()
     {
         $data = School::paginate();

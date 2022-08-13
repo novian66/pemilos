@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
-class PermissionTableSeeder extends Seeder
+class PermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,16 +15,12 @@ class PermissionTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'role-list',
-            'role-create',
-            'role-edit',
-            'role-delete',
-            'school-list',
-            'school-create',
-            'school-edit',
-            'school-delete'
+            'kpu-access',
+            'school-access',
+            'student-access',
+            'timses-access'
          ];
-      
+
          foreach ($permissions as $permission) {
               Permission::create(['name' => $permission]);
          }

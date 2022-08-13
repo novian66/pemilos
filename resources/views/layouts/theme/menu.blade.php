@@ -3,18 +3,19 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-        <a href="#">
-            <img src="{{ asset('dist/img/logo.svg') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('dist/img/logo.svg') }}" width="110" height="32" alt="Tabler"
+                class="navbar-brand-image">
         </a>
     </h1>
     <div class="navbar-nav flex-row order-md-last">
         <div class="nav-item dropdown">
             <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                 aria-label="Open user menu">
-                <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                <span class="avatar avatar-sm">UA</span>
                 <div class="d-none d-xl-block ps-2">
-                    <div>{{ auth()->user()->name}}</div>
-                    <div class="mt-1 small text-muted">Role : {{ auth()->user()->getRoleNames()}}</div>
+                    <div>{{ auth()->user()->name }}</div>
+                    <div class="mt-1 small text-muted">Role : {{ auth()->user()->getRoleNames()[0] }}</div>
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -23,15 +24,20 @@
                 <a href="#" class="dropdown-item">Feedback</a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">Settings</a>
-                <a href="#" class="dropdown-item">Logout</a>
+                <a onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"
+                    class="dropdown-item">Logout</a>
             </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
         </div>
     </div>
     <div class="collapse navbar-collapse" id="navbar-menu">
         <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="./index.html">
+                    <a class="nav-link" href="{{ url('/') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/home -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -48,7 +54,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item {{ (request()->segment(1) == 'school') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->segment(1) == 'school' ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('school.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
@@ -66,8 +72,8 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{ (request()->segment(1) == 'users') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{route('dashboard')}}">
+                <li class="nav-item {{ request()->segment(1) == 'users' ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('dashboard') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -83,8 +89,8 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item {{ (request()->segment(1) == 'settings') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('settings')}}">
+                <li class="nav-item {{ request()->segment(1) == 'settings' ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('settings') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/file-text -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
