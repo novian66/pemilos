@@ -20,6 +20,16 @@
     @yield('styles')
 </head>
 
+<style>
+    .card {
+        border-radius: 20px;
+        box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.07);
+    }
+    .carousel-item img {
+        border-radius: 20px;
+    }
+</style>
+
 <body>
     <div class="wrapper">
         <header class="navbar navbar-expand-md navbar-light d-print-none">

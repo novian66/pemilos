@@ -3,7 +3,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-        <a href="{{ url('/') }}">
+        <a href="{{ route('home') }}">
             <img src="{{ asset('dist/img/logo.svg') }}" width="110" height="32" alt="Tabler"
                 class="navbar-brand-image">
         </a>
@@ -37,7 +37,7 @@
         <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/') }}">
+                    <a class="nav-link" href="{{ route('home') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler-icons.io/i/home -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"

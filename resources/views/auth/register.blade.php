@@ -64,14 +64,20 @@
                             </label>
                             <div class="input-group input-group-flat">
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    name="password_confirmation" placeholder="Password" autocomplete="off" required autocomplete="off">
+                                    name="password_confirmation" placeholder="Password" autocomplete="off" required
+                                    autocomplete="off">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="mb-2 mt-3">
                     <label class="form-check">
-                        <input type="checkbox" class="form-check-input" />
+                        <input type="checkbox" name="tos" class="form-check-input @error('tos') is-invalid @enderror" />
+                        @error('tos')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <span class="form-check-label">Saya Setuju dengan Term Of Service</span>
                     </label>
                 </div>

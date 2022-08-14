@@ -8,7 +8,7 @@
         <div class="container-xl">
             <div class="row justify-content-center" style="border-radius:20px;">
                 <div class="col-md-5">
-                    <div class="card p-3 shadow-sm rounded">
+                    <div class="card p-3">
                         <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_xbf1be8x.json"
                             background="transparent" speed="1" loop autoplay></lottie-player>
                         <h3 class="text-center text-muted">Token Election</h3>

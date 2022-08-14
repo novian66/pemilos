@@ -62,7 +62,7 @@
                 @endforelse
 
                 <div class="col-md-7">
-                    <div class="card p-3 shadow-sm rounded h-100">
+                    <div class="card p-3 h-100">
                         <h3 class="mb-0 text-center">Change Profile</h3>
                         <hr class="mt-3 mb-3">
                         <form action="{{ route('user.editProfile') }}" method="POST" enctype="multipart/form-data">
