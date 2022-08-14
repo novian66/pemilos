@@ -8,6 +8,7 @@ use App\Models\Admin\School;
 use App\Models\Admin\UserJoinSchool;
 use App\Utils\RandomStringGenerator;
 use Illuminate\Http\Request;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class SchoolController extends Controller
 {
@@ -18,10 +19,33 @@ class SchoolController extends Controller
         // ]]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = School::paginate();
+        $data = School::query()
+            ->when($request->cari, function ($q, $r) {
+                $q->where('nama', 'LIKE', "%{$r}%")
+                    ->orWhere('adress', 'LIKE', "%{$r}%");
+            })
+            ->paginate(8);
         return view('admin.school.index', compact('data'));
+    }
+
+    public function import(Request $request)
+    {
+
+        $school = (new FastExcel)->import($request->sampel, function ($line) {
+            return School::create([
+                'user_id' => auth()->user()->id,
+                'nama' => $line['name'],
+                'adress' => $line['description'],
+                'token' => (new RandomStringGenerator)->generate(6),
+                'email' => '-',
+                'phone' => '-',
+                'logo' => '-'
+            ]);
+        });
+
+        return redirect()->route('school.index')->with('success', 'School Hass been Imported');
     }
 
     public function create()
@@ -62,11 +86,13 @@ class SchoolController extends Controller
         return redirect()->route('school.index')->with('success', 'School Hass Been Create');
     }
 
-    public function view($id)
+    public function view($id, Request $request)
     {
         $data = School::findorFail($id);
         $election = ElectionSchool::where('school_id', $data->id)->get();
-        $user = UserJoinSchool::with('user')->where('school_id', $data->id)->paginate();
+        $user = UserJoinSchool::query()
+            ->with('user')->where('school_id', $data->id)
+            ->paginate(8);
         return view('admin.school.view', compact('data', 'election', 'user'));
     }
 
@@ -100,7 +126,7 @@ class SchoolController extends Controller
 
         if ($request->image) {
             // unlick image
-            unlink(public_path('dist/img/logo/'. $data->logo));
+            unlink(public_path('dist/img/logo/' . $data->logo));
 
             $ImageName = time() . '.' . $request->image->extension();
 
@@ -130,7 +156,7 @@ class SchoolController extends Controller
         return redirect()->route('school.view', $data->id)->with('success', 'School Hass Been Update');
     }
 
-    public function destroy($id) 
+    public function destroy($id)
     {
         $data = School::find($id);
         if (empty($data)) {

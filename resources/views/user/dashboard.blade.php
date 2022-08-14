@@ -97,6 +97,36 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3 ">
+                                        <label class="form-label">Phone Number</label>
+                                        <div>
+                                            <input type="number"
+                                                class="form-control @error('phone') is-invalid @enderror"
+                                                name="phone">
+                                            @error('phone')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Tanggal Lahir</label>
+                                        <div>
+                                            <input type="date"
+                                                class="form-control @error('birthday') is-invalid @enderror"
+                                                name="birthday">
+                                            @error('birthday')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group mb-3 ">
                                         <label class="form-label">New Password</label>

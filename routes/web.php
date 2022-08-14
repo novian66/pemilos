@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -32,6 +32,7 @@ Route::post('quickcount', [App\Http\Controllers\QuickcountController::class, 'qu
 Route::prefix('school')->middleware('auth')->group(function () {
     // school
     Route::get('', [App\Http\Controllers\Admin\SchoolController::class, 'index'])->name('school.index');
+    Route::post('', [App\Http\Controllers\Admin\SchoolController::class, 'import'])->name('school.import');
     Route::get('create', [App\Http\Controllers\Admin\SchoolController::class, 'create'])->name('school.create');
     Route::post('create', [App\Http\Controllers\Admin\SchoolController::class, 'store'])->name('school.store');
     Route::get('view/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'view'])->name('school.view');
