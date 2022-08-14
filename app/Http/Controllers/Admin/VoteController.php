@@ -12,9 +12,6 @@ class VoteController extends Controller
     {
         $vote = ElectionVote::where([
             'user_id' => auth()->user()->id,
-            'school_id' => $school_id,
-            'election_school_id' => $election_id,
-            'election_school_candidate_id' => $id,
         ])->first();
         if ($vote) {
             return redirect()->route('dashboard')->with('error', 'Anda Sudah Memilih');
