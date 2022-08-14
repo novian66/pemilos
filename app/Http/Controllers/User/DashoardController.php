@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Admin\CandidateElectionController;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ElectionSchool;
+use App\Models\Admin\ElectionSchoolCandidate;
 use App\Models\Admin\School;
 use App\Models\Admin\UserJoinSchool;
 use Illuminate\Http\Request;
@@ -62,6 +64,12 @@ class DashoardController extends Controller
         if (empty($event)) {
             return redirect()->route('dashboard')->with('error', 'Token Salah!');
         }
-        return view('user.election', compact('event'))->with('success', 'Sukses!');
+        return view('user.event', compact('event'))->with('success', 'Sukses!');
+    }
+
+    public function showEventCandidate(Request $request, $school_id)
+    {
+        $candidate = ElectionSchoolCandidate::where('school_id', $school_id)->get();
+        return view('user.election', compact('candidate'));
     }
 }

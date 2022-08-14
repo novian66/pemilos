@@ -59,13 +59,11 @@ Route::prefix('users')->middleware('auth')->group(function () {
     Route::get('', [App\Http\Controllers\User\DashoardController::class, 'index'])->name('dashboard');
     Route::post('', [App\Http\Controllers\User\DashoardController::class, 'joinSchool'])->name('user.joinSchool');
     Route::patch('', [App\Http\Controllers\User\DashoardController::class, 'editProfile'])->name('user.editProfile');
-    Route::post('school', [App\Http\Controllers\User\DashoardController::class, 'showSchoolEvent'])->name('user.event');
 });
 
 
-Route::prefix('vote')->middleware('auth')->group(function() {
-    Route::get('', [App\Http\Controllers\User\VoteController::class, 'index'])->name('vote.index');
-    Route::post('', [App\Http\Controllers\User\VoteController::class, 'store'])->name('vote.verify');
-    // Route::get('/{id}', [App\Http\Controllers\User\VoteController::class, 'show'])->name('vote.show');
-    // Route::patch('/{id}', [App\Http\Controllers\User\VoteController::class, 'update'])->name('vote.update');
+Route::prefix('vote')->middleware('auth')->group(function () {
+    Route::post('event', [App\Http\Controllers\User\DashoardController::class, 'showSchoolEvent'])->name('user.event');
+    Route::get('event/{id}', [App\Http\Controllers\User\DashoardController::class, 'showEventCandidate'])->name('user.election');
+    Route::get('/{id}/school/{school_id}/election/{election_id}', [App\Http\Controllers\Admin\VoteController::class, 'voteCandidate'])->name('user.vote');
 });
