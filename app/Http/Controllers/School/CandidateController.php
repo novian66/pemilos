@@ -16,29 +16,29 @@ class CandidateController extends Controller
         $school = School::where(['user_id' => auth()->user()->id])->first();
         if (empty($school)) {
             # code...
-            return redirect()->route('school.index')->with('error', 'School Not Found');
+            return redirect()->route('school-management')->with('error', 'School Not Found');
         }
 
         $election = ElectionSchool::find($id);
         if (empty($election)) {
             # code...
-            return redirect()->route('school.index')->with('error', 'School Not Found');
+            return redirect()->route('lihat-election', $election->id)->with('error', 'School Not Found');
         }
-        return view('admin.candidate.create', compact('school', 'election'));
+        return view('school.candidate.create', compact('school', 'election'));
     }
 
-    public function store(Request $request, $id, $election_id)
+    public function store(Request $request, $id)
     {
         $school = School::where(['user_id' => auth()->user()->id])->first();
         if (empty($school)) {
             # code...
-            return redirect()->route('school.index')->with('error', 'School Not Found');
+            return redirect()->route('school-management')->with('error', 'School Not Found');
         }
 
         $election = ElectionSchool::find($id);
         if (empty($election)) {
             # code...
-            return redirect()->route('school.index')->with('error', 'School Not Found');
+            return redirect()->route('lihat-election', $election->id)->with('error', 'School Not Found');
         }
 
         $request->validate([
@@ -62,6 +62,14 @@ class CandidateController extends Controller
         ]);
 
         $request->image->move(public_path('dist/img/candidate/'), $ImageName);
-        return redirect()->route('election.view', ['id' => $school->id, 'election_id' => $election->id])->with('success', 'Candidate hass been created');
+        return redirect()->route('lihat-election', $election->id)->with('success', 'Candidate hass been created');
+    }
+
+    public function destroy($candidate_id, $id)
+    {
+        $candidate = ElectionSchoolCandidate::find($candidate_id);
+        $candidate->delete();
+        // $election = ElectionSchool::find($id);
+        return redirect()->route('lihat-election', 4)->with('success', 'Candidate Hass Been Deleted');
     }
 }

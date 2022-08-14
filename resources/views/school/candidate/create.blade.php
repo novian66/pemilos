@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-body">
-                        <form action="{{ route('candidate-store', 'id' => $election->id]) }}"
+                        <form action="{{ route('candidate-store', $election->id) }}"
                             method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">

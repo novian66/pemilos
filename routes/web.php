@@ -30,7 +30,7 @@ Route::middleware(['auth', 'dontback'])->group(function () {
     Route::post('quickcount', [App\Http\Controllers\QuickcountController::class, 'quickcount'])->name('hasil');
 
     // kpu only route
-    Route::prefix('kpu')->group(function () {
+    Route::prefix('kpu')->middleware('role:kpu')->group(function () {
         Route::prefix('school')->group(function () {
             // school
             Route::get('', [App\Http\Controllers\Admin\SchoolController::class, 'index'])->name('school.index');
@@ -61,7 +61,7 @@ Route::middleware(['auth', 'dontback'])->group(function () {
     });
 
     // routing school
-    Route::prefix('school')->group(function () {
+    Route::prefix('school')->middleware('role:school')->group(function () {
         Route::get('', [App\Http\Controllers\School\IndexController::class, 'index'])->name('school-management');
         Route::post('', [App\Http\Controllers\School\IndexController::class, 'store'])->name('daftar-sekolah');
         Route::patch('', [App\Http\Controllers\School\IndexController::class, 'update'])->name('update-sekolah');
@@ -71,12 +71,13 @@ Route::middleware(['auth', 'dontback'])->group(function () {
         Route::get('/election', [App\Http\Controllers\School\ElectionController::class, 'create'])->name('buat-election');
         Route::post('/election', [App\Http\Controllers\School\ElectionController::class, 'store'])->name('simpan-election');
         Route::get('/election/{id}', [App\Http\Controllers\School\ElectionController::class, 'view'])->name('lihat-election');
+        Route::patch('/election/{id}', [App\Http\Controllers\School\ElectionController::class, 'update'])->name('ganti');
         Route::delete('/election/{id}', [App\Http\Controllers\School\ElectionController::class, 'destroy'])->name('hapus-election');
 
         Route::get('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'create'])->name('candidate-create');
         Route::post('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'store'])->name('candidate-store');
-        
-    
+        Route::delete('/election/{id}/candidate/{candidate_id}', [App\Http\Controllers\School\CandidateController::class, 'destroy'])->name('candidate-delete');
+
     });
 
     // routing users

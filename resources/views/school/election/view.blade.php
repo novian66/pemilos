@@ -19,7 +19,7 @@
             </svg>
             Delete
         </a>
-        <form id="hapus-election" action="{{ route('election.destroy', ['id' => $school->id, 'election_id' => $data->id]) }}" method="POST" class="d-none">
+        <form id="hapus-election" action="{{ route('hapus-election', $data->id) }}" method="POST" class="d-none">
             @csrf @method('DELETE')
         </form>
     </div>
@@ -63,7 +63,8 @@
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <a href="#" class="card-btn text-danger">
+                                        <a class="card-btn text-danger"
+                                            onclick="event.preventDefault(); document.getElementById('hapus-candidate-{{ $paslon->id }}').submit();">
                                             <!-- Download SVG icon from http://tabler-icons.io/i/phone -->
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-danger"
                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -81,6 +82,11 @@
                                             </svg>
                                             Delete
                                         </a>
+                                        <form id="hapus-candidate-{{ $paslon->id }}"
+                                            action="{{ route('candidate-delete', ['candidate_id' => $paslon->id, 'id' => $data->id]) }}"
+                                            method="POST" class="d-none">
+                                            @csrf @method('DELETE')
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -89,8 +95,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class="card p-2 shadow-sm rounded">
-                        <form action="{{ route('election.update', ['id' => $school->id, 'election_id' => $data->id]) }}"
-                            method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('ganti', $data->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="row">
@@ -113,7 +118,7 @@
                                     <div class="form-group mb-3 ">
                                         <label class="form-label">Start Election</label>
                                         <div>
-                                            <input type="date" min="{{date('Y-m-d')}}"
+                                            <input type="date" min="{{ date('Y-m-d') }}"
                                                 class="form-control @error('start') is-invalid @enderror"
                                                 value="{{ $data->start }}" name="start" id="datetime">
                                             @error('start')
@@ -141,7 +146,8 @@
                                     <div class="form-group mb-3 ">
                                         <label class="form-label">Finish Election</label>
                                         <div>
-                                            <input type="date" min="{{date('Y-m-d')}}" class="form-control @error('end') is-invalid @enderror"
+                                            <input type="date" min="{{ date('Y-m-d') }}"
+                                                class="form-control @error('end') is-invalid @enderror"
                                                 value="{{ $data->end }}" name="end" id="datetime">
                                             @error('end')
                                                 <span class="invalid-feedback" role="alert">
