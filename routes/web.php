@@ -25,38 +25,58 @@ Route::middleware(['auth', 'dontback'])->group(function () {
     // dashboard all users
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    // admin settings
-    Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
-
     // realtime quickcount
     Route::get('quickcount', [App\Http\Controllers\QuickcountController::class, 'index'])->name('quickcount');
     Route::post('quickcount', [App\Http\Controllers\QuickcountController::class, 'quickcount'])->name('hasil');
 
     // kpu only route
+    Route::prefix('kpu')->group(function () {
+        Route::prefix('school')->group(function () {
+            // school
+            Route::get('', [App\Http\Controllers\Admin\SchoolController::class, 'index'])->name('school.index');
+            Route::post('', [App\Http\Controllers\Admin\SchoolController::class, 'import'])->name('school.import');
+            Route::get('create', [App\Http\Controllers\Admin\SchoolController::class, 'create'])->name('school.create');
+            Route::post('create', [App\Http\Controllers\Admin\SchoolController::class, 'store'])->name('school.store');
+            Route::get('view/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'view'])->name('school.view');
+            Route::delete('view/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'destroy'])->name('school.destroy');
+
+            // election
+            Route::get('view/{id}/election', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'create'])->name('election.create');
+            Route::post('view/{id}/election', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'store'])->name('election.store');
+            Route::get('view/{id}/election/{election_id}/view', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'view'])->name('election.view');
+            Route::patch('view/{id}/election/{election_id}/view', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'update'])->name('election.update');
+            Route::delete('view/{id}/election/{election_id}/delete', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'destroy'])->name('election.destroy');
+
+            // candidate election
+            Route::get('view/{id}/election/{election_id}/candidate', [App\Http\Controllers\Admin\CandidateElectionController::class, 'create'])->name('candidate.create');
+            Route::post('view/{id}/election/{election_id}/candidate', [App\Http\Controllers\Admin\CandidateElectionController::class, 'store'])->name('candidate.store');
+
+            // edit and delete school
+            Route::get('edit/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'edit'])->name('school.edit');
+            Route::patch('edit/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'update'])->name('school.update');
+            // Route::delete('delete/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'destroy'])->name('school.destroy');
+        });
+
+        Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
+    });
+
+    // routing school
     Route::prefix('school')->group(function () {
-        // school
-        Route::get('', [App\Http\Controllers\Admin\SchoolController::class, 'index'])->name('school.index');
-        Route::post('', [App\Http\Controllers\Admin\SchoolController::class, 'import'])->name('school.import');
-        Route::get('create', [App\Http\Controllers\Admin\SchoolController::class, 'create'])->name('school.create');
-        Route::post('create', [App\Http\Controllers\Admin\SchoolController::class, 'store'])->name('school.store');
-        Route::get('view/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'view'])->name('school.view');
-        Route::delete('view/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'destroy'])->name('school.destroy');
+        Route::get('', [App\Http\Controllers\School\IndexController::class, 'index'])->name('school-management');
+        Route::post('', [App\Http\Controllers\School\IndexController::class, 'store'])->name('daftar-sekolah');
+        Route::patch('', [App\Http\Controllers\School\IndexController::class, 'update'])->name('update-sekolah');
+        Route::delete('', [App\Http\Controllers\School\IndexController::class, 'destroy'])->name('hapus-sekolah');
 
-        // election
-        Route::get('view/{id}/election', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'create'])->name('election.create');
-        Route::post('view/{id}/election', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'store'])->name('election.store');
-        Route::get('view/{id}/election/{election_id}/view', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'view'])->name('election.view');
-        Route::patch('view/{id}/election/{election_id}/view', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'update'])->name('election.update');
-        Route::delete('view/{id}/election/{election_id}/delete', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'destroy'])->name('election.destroy');
+        Route::get('/view', [App\Http\Controllers\School\ElectionController::class, 'index'])->name('election-school');
+        Route::get('/election', [App\Http\Controllers\School\ElectionController::class, 'create'])->name('buat-election');
+        Route::post('/election', [App\Http\Controllers\School\ElectionController::class, 'store'])->name('simpan-election');
+        Route::get('/election/{id}', [App\Http\Controllers\School\ElectionController::class, 'view'])->name('lihat-election');
+        Route::delete('/election/{id}', [App\Http\Controllers\School\ElectionController::class, 'destroy'])->name('hapus-election');
 
-        // candidate election
-        Route::get('view/{id}/election/{election_id}/candidate', [App\Http\Controllers\Admin\CandidateElectionController::class, 'create'])->name('candidate.create');
-        Route::post('view/{id}/election/{election_id}/candidate', [App\Http\Controllers\Admin\CandidateElectionController::class, 'store'])->name('candidate.store');
-
-        // edit and delete school
-        Route::get('edit/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'edit'])->name('school.edit');
-        Route::patch('edit/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'update'])->name('school.update');
-        // Route::delete('delete/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'destroy'])->name('school.destroy');
+        Route::get('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'create'])->name('candidate-create');
+        Route::post('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'store'])->name('candidate-store');
+        
+    
     });
 
     // routing users

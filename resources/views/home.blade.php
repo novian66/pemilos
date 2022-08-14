@@ -38,17 +38,15 @@
                                 Sekolah Kamu
                             </p>
                             <div class="empty-action">
-                                <a href="{{ route('user.editProfile') }}" class="btn btn-primary">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <circle cx="10" cy="10" r="7"></circle>
-                                        <line x1="21" y1="21" x2="15" y2="15"></line>
-                                    </svg>
-                                    gabung Sekolah
-                                </a>
+                                <button type="button" class="btn btn-warning">
+                                    @if (auth()->user()->getroleNames()[0] == 'student')
+                                        Gabung Sekolah
+                                    @elseif (auth()->user()->getroleNames()[0] == 'school')
+                                        Kelola Sekolah
+                                    @else 
+                                        Kelola System
+                                    @endif
+                                </button>
                             </div>
                         </div>
                     </div>
