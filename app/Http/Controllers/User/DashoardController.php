@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\ElectionSchool;
 use App\Models\Admin\ElectionSchoolCandidate;
 use App\Models\Admin\School;
+use App\Models\Admin\UserJoinElection;
 use App\Models\Admin\UserJoinSchool;
 use Illuminate\Http\Request;
 
@@ -64,7 +65,19 @@ class DashoardController extends Controller
         if (empty($event)) {
             return redirect()->route('dashboard')->with('error', 'Token Salah!');
         }
-        return view('user.event', compact('event'))->with('success', 'Sukses!');
+
+        $check = UserJoinElection::where([
+            'user_id' => auth()->user()->id,
+        ])->first();
+
+        if (empty($check)) {
+            UserJoinElection::create([
+                'user_id' => auth()->user()->id,
+                'election_school_id' => $event->id,
+                'school_id' => $event->school_id,
+            ]);
+        }
+        return view('user.event', compact('event'));
     }
 
     public function showEventCandidate(Request $request, $school_id)
