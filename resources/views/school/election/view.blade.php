@@ -83,7 +83,7 @@
                                             Delete
                                         </a>
                                         <form id="hapus-candidate-{{ $paslon->id }}"
-                                            action="{{ route('candidate-delete', ['candidate_id' => $paslon->id, 'id' => $data->id]) }}"
+                                            action="{{ route('hapus-paslon', $paslon->id) }}"
                                             method="POST" class="d-none">
                                             @csrf @method('DELETE')
                                         </form>

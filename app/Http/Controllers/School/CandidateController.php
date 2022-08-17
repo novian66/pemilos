@@ -65,11 +65,10 @@ class CandidateController extends Controller
         return redirect()->route('lihat-election', $election->id)->with('success', 'Candidate hass been created');
     }
 
-    public function destroy($candidate_id, $id)
+    public function destroy($id)
     {
-        $candidate = ElectionSchoolCandidate::find($candidate_id);
+        $candidate = ElectionSchoolCandidate::find($id);
         $candidate->delete();
-        // $election = ElectionSchool::find($id);
-        return redirect()->route('lihat-election', 4)->with('success', 'Candidate Hass Been Deleted');
+        return redirect()->back()->with('success', 'Candidate Hass Been Deleted');
     }
 }

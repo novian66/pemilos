@@ -76,7 +76,7 @@ Route::middleware(['auth', 'dontback'])->group(function () {
 
         Route::get('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'create'])->name('candidate-create');
         Route::post('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'store'])->name('candidate-store');
-        Route::delete('/election/{id}/candidate/{candidate_id}', [App\Http\Controllers\School\CandidateController::class, 'destroy'])->name('candidate-delete');
+        Route::delete('candidate/{id}', [App\Http\Controllers\School\CandidateController::class, 'destroy'])->name('hapus-paslon');
 
     });
 
