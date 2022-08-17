@@ -51,7 +51,10 @@ class DashoardController extends Controller
     {
         $user = auth()->user();
         $user->name = $request->nama;
+        $user->jenis_kelamin = $request->jenis_kelamin;
         $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->birthday = $request->birthday;
         if ($request->password) {
             $user->password = bcrypt($request->password);
         }
