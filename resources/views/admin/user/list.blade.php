@@ -5,7 +5,7 @@
 
 @section('button-header')
     <div class="btn-list">
-        <a href="{{ route('school.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+        <a href="{{ route('users.create') }}" class="btn btn-primary d-none d-sm-inline-block">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -61,20 +61,7 @@
                                 </div>
                             </div>
                             <div class="d-flex mt-1 mb-0">
-                                <a href=""
-                                    class="card-btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted" width="24"
-                                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <circle cx="12" cy="12" r="2"></circle>
-                                        <path
-                                            d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7">
-                                        </path>
-                                    </svg>
-                                    View
-                                </a>
-                                <a class="card-btn text-danger"
+                                <a class="card-btn text-danger cursor-pointer"
                                     onclick="event.preventDefault(); document.getElementById('hapus-election-{{ $data->id }}').submit();">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-danger" width="24"
                                         height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -89,8 +76,7 @@
                                     Delete
                                 </a>
                                 <form id="hapus-election-{{ $data->id }}"
-                                    action="#"
-                                    method="POST" class="d-none">
+                                    action="{{ route('users.delete', $data->id) }}" method="POST" class="d-none">
                                     @csrf @method('DELETE')
                                 </form>
                             </div>

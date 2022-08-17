@@ -31,4 +31,33 @@ class UserConroller extends Controller
 
         return view('admin.user.list', compact('user', 'roles'));
     }
+
+    public function createUser(Request $request)
+    {
+        $check = User::where('email', $request->email)->first();
+        if ($check) {
+            return redirect()->route('users.all')->with('error', 'User dengan email yang sama sudah ada!');
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        $user->assignRole($request->role);
+        return redirect()->route('users.all')->with('success', 'User Berhasil Ditambahkan');
+    }
+
+    public function create()
+    {
+        $roles = Role::all();
+        return view('admin.user.create', compact('roles'));
+    }
+
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('users.all')->with('success', 'User Berhasil Dihapus');
+    }
 }

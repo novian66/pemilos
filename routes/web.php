@@ -59,7 +59,10 @@ Route::middleware(['auth', 'dontback'])->group(function () {
 
         Route::prefix('users')->group(function () {
             Route::get('', [App\Http\Controllers\Admin\UserConroller::class, 'index'])->name('users.all');
-            Route::get('/{role}', [App\Http\Controllers\Admin\UserConroller::class, 'list'])->name('users.list');
+            Route::get('role/{role}', [App\Http\Controllers\Admin\UserConroller::class, 'list'])->name('users.list');
+            Route::get('/create', [App\Http\Controllers\Admin\UserConroller::class, 'create'])->name('users.create');
+            Route::post('/create', [App\Http\Controllers\Admin\UserConroller::class, 'createUser'])->name('users.save');
+            Route::delete('/delete/{id}', [App\Http\Controllers\Admin\UserConroller::class, 'deleteUser'])->name('users.delete');
         });
 
         Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
