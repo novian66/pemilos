@@ -63,6 +63,10 @@ Route::middleware(['auth', 'dontback'])->group(function () {
         });
 
         Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
+        Route::get('api', [App\Http\Controllers\Api\ResquestApiController::class, 'view'])->name('kpu.api');
+        Route::get('api/{id}', [App\Http\Controllers\Api\ResquestApiController::class, 'checkapi'])->name('kpu.api.view');
+        Route::post('api/{id}', [App\Http\Controllers\Api\ResquestApiController::class, 'aprove'])->name('kpu.api.acc');
+
     });
 
     // routing school
@@ -82,6 +86,10 @@ Route::middleware(['auth', 'dontback'])->group(function () {
         Route::get('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'create'])->name('candidate-create');
         Route::post('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'store'])->name('candidate-store');
         Route::delete('candidate/{id}', [App\Http\Controllers\School\CandidateController::class, 'destroy'])->name('hapus-paslon');
+
+        Route::get('/api', [App\Http\Controllers\Api\ResquestApiController::class, 'index'])->name('school.api');
+        Route::post('/api', [App\Http\Controllers\Api\ResquestApiController::class, 'store'])->name('request.api');
+
     });
 
     // routing users

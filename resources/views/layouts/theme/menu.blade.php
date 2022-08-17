@@ -62,8 +62,7 @@
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings"
                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                     <path
                                         d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z">
@@ -76,48 +75,51 @@
                             </span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{route('users.all')}}">
+                            <a class="dropdown-item" href="{{ route('users.all') }}">
                                 Users Management
                             </a>
-                            <a class="dropdown-item" href="{{ route('school.index')}}">
+                            <a class="dropdown-item" href="{{ route('school.index') }}">
                                 School management
                             </a>
-                            <a class="dropdown-item" href="{{ route('settings')}}">
+                            <a class="dropdown-item" href="{{ route('settings') }}">
                                 Election History
                             </a>
-                            <a class="dropdown-item" href="{{ route('settings')}}">
-                                Settings Website
+                            <a class="dropdown-item" href="{{ route('kpu.api') }}">
+                                Rest API  <span class="badge text-bg-danger ms-3">New</span>
                             </a>
                         </div>
                     </li>
                 @endif
 
                 @if (auth()->user()->getRoleNames()[0] == 'school')
-                <li class="nav-item dropdown {{ request()->segment(1) == 'school' ? 'active' : '' }}">
-                    <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside" role="button" aria-expanded="false">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <polyline points="9 11 12 14 20 6" />
-                                <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
-                            </svg>
-                        </span>
-                        <span class="nav-link-title">
-                            Tools School
-                        </span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('school-management') }}">
-                            School Management
+                    <li class="nav-item dropdown {{ request()->segment(1) == 'school' ? 'active' : '' }}">
+                        <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" role="button" aria-expanded="false">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <polyline points="9 11 12 14 20 6" />
+                                    <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
+                                </svg>
+                            </span>
+                            <span class="nav-link-title">
+                                Tools School
+                            </span>
                         </a>
-                        <a class="dropdown-item" href="./gallery.html">
-                            Timses Management
-                        </a>
-                    </div>
-                </li>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('school-management') }}">
+                                School Management
+                            </a>
+                            <a class="dropdown-item" href="{{ route('school.api') }}">
+                                Rest API Token
+                            </a>
+                            <a class="dropdown-item" href="./gallery.html">
+                                Timses Management
+                            </a>
+                        </div>
+                    </li>
                 @endif
 
                 @if (auth()->user()->getRoleNames()[0] == 'student')
