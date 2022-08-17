@@ -52,7 +52,6 @@ class DashoardController extends Controller
         $user = auth()->user();
         $user->name = $request->nama;
         $user->jenis_kelamin = $request->jenis_kelamin;
-        $user->email = $request->email;
         $user->phone = $request->phone;
         $user->birthday = $request->birthday;
         if ($request->password) {
@@ -83,9 +82,9 @@ class DashoardController extends Controller
         return view('user.event', compact('event'));
     }
 
-    public function showEventCandidate(Request $request, $school_id)
+    public function showEventCandidate(Request $request, $election_school_id)
     {
-        $candidate = ElectionSchoolCandidate::where('school_id', $school_id)->get();
+        $candidate = ElectionSchoolCandidate::where('election_school_id', $election_school_id)->get();
         return view('user.election', compact('candidate'));
     }
 }

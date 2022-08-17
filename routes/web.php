@@ -103,7 +103,7 @@ Route::middleware(['auth', 'dontback'])->group(function () {
     // routing vote
     Route::prefix('vote')->group(function () {
         Route::post('event', [App\Http\Controllers\User\DashoardController::class, 'showSchoolEvent'])->name('user.event');
-        Route::get('event/{id}', [App\Http\Controllers\User\DashoardController::class, 'showEventCandidate'])->name('user.election');
+        Route::get('event/{election_school_id}', [App\Http\Controllers\User\DashoardController::class, 'showEventCandidate'])->name('user.election');
         Route::get('/{id}/school/{school_id}/election/{election_id}', [App\Http\Controllers\Admin\VoteController::class, 'voteCandidate'])->name('user.vote');
     });
 });

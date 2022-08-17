@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="d-flex mt-1 mb-0">
-                            <a href="{{ route('user.election', $event->school_id) }}" class="card-btn">
+                            <a href="{{ route('user.election', $event->id) }}" class="card-btn">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted" width="24"
                                     height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                     stroke-linecap="round" stroke-linejoin="round">

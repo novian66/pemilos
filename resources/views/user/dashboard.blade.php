@@ -41,17 +41,17 @@
                                     <div class="d-flex">
                                         <a href="#" class="card-btn" data-bs-toggle="modal"
                                             data-bs-target="#modal-token">
-                                            <!-- Download SVG icon from http://tabler-icons.io/i/mail -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted"
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye me-2"
                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                                 stroke="currentColor" fill="none" stroke-linecap="round"
                                                 stroke-linejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <rect x="3" y="5" width="18" height="14"
-                                                    rx="2"></rect>
-                                                <polyline points="3 7 12 13 21 7"></polyline>
+                                                <circle cx="12" cy="12" r="2"></circle>
+                                                <path
+                                                    d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7">
+                                                </path>
                                             </svg>
-                                            View
+                                            Lihat Kegiatan
                                         </a>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                         <label class="form-label">Email Adress</label>
                                         <div>
                                             <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                                value="{{ auth()->user()->email }}" name="email">
+                                                value="{{ auth()->user()->email }}" name="email" disabled>
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -134,7 +134,8 @@
                                             <select class="form-select @error('jenis_kelamin') is-invalid @enderror"
                                                 name="jenis_kelamin">
                                                 <option value="L"
-                                                    {{ auth()->user()->jenis_kelamin === 'L' ? 'selected' : '' }}>Laki - laki
+                                                    {{ auth()->user()->jenis_kelamin === 'L' ? 'selected' : '' }}>Laki -
+                                                    laki
                                                 </option>
                                                 <option value="P"
                                                     {{ auth()->user()->jenis_kelamin === 'P' ? 'selected' : '' }}>Perempuan
