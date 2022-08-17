@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['checkHeader'])->group(function () {
+    Route::post('school', [App\Http\Controllers\Api\IndexController::class, 'index']);
 });
