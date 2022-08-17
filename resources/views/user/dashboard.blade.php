@@ -39,7 +39,8 @@
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <a href="#" class="card-btn" data-bs-toggle="modal" data-bs-target="#modal-token">
+                                        <a href="#" class="card-btn" data-bs-toggle="modal"
+                                            data-bs-target="#modal-token">
                                             <!-- Download SVG icon from http://tabler-icons.io/i/mail -->
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted"
                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -101,9 +102,8 @@
                                     <div class="form-group mb-3 ">
                                         <label class="form-label">Phone Number</label>
                                         <div>
-                                            <input type="number"
-                                                class="form-control @error('phone') is-invalid @enderror"
-                                                name="phone">
+                                            <input type="number" class="form-control @error('phone') is-invalid @enderror"
+                                                name="phone" value="{{ auth()->user()->phone }}">
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -118,7 +118,7 @@
                                         <div>
                                             <input type="date"
                                                 class="form-control @error('birthday') is-invalid @enderror"
-                                                name="birthday">
+                                                name="birthday" value="{{ auth()->user()->birthday }}">
                                             @error('birthday')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -127,7 +127,28 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Jenis Kelamin</label>
+                                        <div>
+                                            <select class="form-select @error('jenis_kelamin') is-invalid @enderror"
+                                                name="jenis_kelamin">
+                                                <option value="L"
+                                                    {{ auth()->user()->jenis_kelamin === 'L' ? 'selected' : '' }}>Laki - laki
+                                                </option>
+                                                <option value="P"
+                                                    {{ auth()->user()->jenis_kelamin === 'P' ? 'selected' : '' }}>Perempuan
+                                                </option>
+                                            </select>
+                                            @error('jenis_kelamin')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                     <div class="form-group mb-3 ">
                                         <label class="form-label">New Password</label>
                                         <div>
