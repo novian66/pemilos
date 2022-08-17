@@ -57,6 +57,10 @@ Route::middleware(['auth', 'dontback'])->group(function () {
             // Route::delete('delete/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'destroy'])->name('school.destroy');
         });
 
+        Route::prefix('users')->group(function () {
+            
+        });
+
         Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
     });
 
