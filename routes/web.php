@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Auth::routes();
@@ -69,7 +69,6 @@ Route::middleware(['auth', 'dontback'])->group(function () {
         Route::get('api', [App\Http\Controllers\Api\ResquestApiController::class, 'view'])->name('kpu.api');
         Route::get('api/{id}', [App\Http\Controllers\Api\ResquestApiController::class, 'checkapi'])->name('kpu.api.view');
         Route::post('api/{id}', [App\Http\Controllers\Api\ResquestApiController::class, 'aprove'])->name('kpu.api.acc');
-
     });
 
     // routing school
@@ -92,7 +91,6 @@ Route::middleware(['auth', 'dontback'])->group(function () {
 
         Route::get('/api', [App\Http\Controllers\Api\ResquestApiController::class, 'index'])->name('school.api');
         Route::post('/api', [App\Http\Controllers\Api\ResquestApiController::class, 'store'])->name('request.api');
-
     });
 
     // routing users

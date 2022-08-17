@@ -70,7 +70,7 @@
                                 <span class="avatar avatar-xl mb-3 avatar-rounded"
                                     style="background-image: url({{ asset('dist/img/logo/' . $school->logo) }})"></span>
                                 <h3 class="m-0 mb-1">{{ $school->nama }}</h3>
-                                <div class="text-muted">{{ $school->email }}</div>
+                                <div class="text-muted">Token: {{ $school->token }}</div>
                                 <div class="mt-3">
                                     <span class="badge bg-purple-lt">{{ $school->status }}</span>
                                 </div>
