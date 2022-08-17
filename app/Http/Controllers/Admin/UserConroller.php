@@ -53,4 +53,11 @@ class UserConroller extends Controller
         $roles = Role::all();
         return view('admin.user.create', compact('roles'));
     }
+
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('users.all')->with('success', 'User Berhasil Dihapus');
+    }
 }
