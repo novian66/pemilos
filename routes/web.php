@@ -58,7 +58,8 @@ Route::middleware(['auth', 'dontback'])->group(function () {
         });
 
         Route::prefix('users')->group(function () {
-            
+            Route::get('', [App\Http\Controllers\Admin\UserConroller::class, 'index'])->name('users.all');
+            Route::get('/{role}', [App\Http\Controllers\Admin\UserConroller::class, 'list'])->name('users.list');
         });
 
         Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
@@ -81,7 +82,6 @@ Route::middleware(['auth', 'dontback'])->group(function () {
         Route::get('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'create'])->name('candidate-create');
         Route::post('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'store'])->name('candidate-store');
         Route::delete('candidate/{id}', [App\Http\Controllers\School\CandidateController::class, 'destroy'])->name('hapus-paslon');
-
     });
 
     // routing users

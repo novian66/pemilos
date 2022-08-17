@@ -76,7 +76,7 @@
                             </span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="./activity.html">
+                            <a class="dropdown-item" href="{{route('users.all')}}">
                                 Users Management
                             </a>
                             <a class="dropdown-item" href="{{ route('school.index')}}">
