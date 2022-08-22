@@ -15,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['checkHeader'])->group(function () {
-    Route::post('school', [App\Http\Controllers\Api\IndexController::class, 'index']);
+    Route::post('school', [App\Http\Controllers\Api\IndexController::class, 'school']);
+    Route::post('election', [App\Http\Controllers\Api\IndexController::class, 'election']);
+    Route::post('candidate', [App\Http\Controllers\Api\IndexController::class, 'candidate']);
+    Route::post('vote', [App\Http\Controllers\Api\IndexController::class, 'vote']);
 });

@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,5 +30,10 @@ class School extends Model
     public function quickcount()
     {
         return $this->hasMany(ElectionVote::class, 'school_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
