@@ -8,7 +8,7 @@
         <div class="container-xl">
             <div class="row row-card">
                 <div class="col-sm-6 col-lg-8">
-                    <div class="card p-2">
+                    <div class="card p-2 mb-3">
                         <div id="carousel-indicators" class="carousel slide" data-bs-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-bs-target="#carousel-indicators" data-bs-slide-to="0" class="active"></li>
@@ -17,11 +17,11 @@
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <img class="d-block w-100" alt=""
-                                        src="https://images.tokopedia.net/img/cache/1208/NsjrJu/2022/8/12/462de4ea-4acb-4987-84e9-45a14794a72b.jpg.webp">
+                                        src="{{ asset('dist/img/slider/slider1.jpg') }}">
                                 </div>
                                 <div class="carousel-item">
                                     <img class="d-block w-100" alt=""
-                                        src="https://images.tokopedia.net/img/cache/1208/NsjrJu/2022/8/13/a2cdbfc5-51d7-4bd1-8f2d-ebf072caa882.jpg">
+                                        src="{{ asset('dist/img/slider/slider2.jpg') }}">
                                 </div>
                             </div>
                         </div>
