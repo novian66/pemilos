@@ -7,7 +7,7 @@
     <div class="container-tight py-4">
         <div class="text-center mb-4">
             <a href="{{url('/')}}" class="navbar-brand navbar-brand-autodark">
-                <img src="{{ asset('dist/img/logo.svg') }}" height="36"
+                <img src="{{ asset('dist/img/logo.png') }}" height="36"
                     alt="">
                 </a>
         </div>

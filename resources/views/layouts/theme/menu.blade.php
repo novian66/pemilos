@@ -4,7 +4,7 @@
     </button>
     <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
         <a href="{{ route('home') }}">
-            <img src="{{ asset('dist/img/logo.svg') }}" width="110" height="32" alt="Tabler"
+            <img src="{{ asset('dist/img/logo.png') }}" width="110" height="32" alt="Tabler"
                 class="navbar-brand-image">
         </a>
     </h1>
@@ -19,11 +19,7 @@
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="#" class="dropdown-item">Set status</a>
-                <a href="#" class="dropdown-item">Profile & account</a>
-                <a href="#" class="dropdown-item">Feedback</a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">Settings</a>
+                <a href="{{route('user.editProfile')}}" class="dropdown-item">Profile</a>
                 <a onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();"
                     class="dropdown-item">Logout</a>
