@@ -176,13 +176,13 @@
                                 </div>
                             </div>
 
-                            {{-- paginate --}}
-                            <div class="mt-4">
-                                {!! $user->links() !!}
-                            </div>
-                        @empty
+                            @empty
                             @include('layouts.theme.empty')
                         @endforelse
+                    </div>
+                    {{-- paginate --}}
+                    <div class="mt-4">
+                        {!! $user->links() !!}
                     </div>
                 </div>
             </div>
