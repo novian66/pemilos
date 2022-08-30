@@ -33,17 +33,35 @@
                         <div class="empty">
                             <p class="empty-title">Selamat Datang</p>
                             <p class="empty-subtitle text-muted">
-                                Hai <strong class="text-danger">{{ auth()->user()->name }}</strong> Apa Kabar ? Semoga Sehat
-                                Selalu, Yuk Join Langsung Sesuai
-                                Sekolah Kamu
+                                Hai <strong class="text-danger">{{ auth()->user()->name }}</strong>
                             </p>
+                            <span>Apa Kabar ? Semoga Sehat Selalu,</span>
+                            @if (!empty($school))
+                                <span>Kamu adalah siswa di {{ $school->nama }}</span>
+                            @else
+                                <p>Yuk
+                                    @if (auth()->user()->getroleNames()[0] == 'student')
+                                        Join Langsung Sesuai Sekolah
+                                    @elseif (auth()->user()->getroleNames()[0] == 'school')
+                                        Kelola Sekolah
+                                    @else
+                                        Kelola Sistem
+                                    @endif
+                                    Kamu
+                                </p>
+                            @endif
+
                             <div class="empty-action">
                                 <button type="button" class="btn btn-warning">
                                     @if (auth()->user()->getroleNames()[0] == 'student')
-                                        Gabung Sekolah
+                                        @if (empty($school))
+                                            Gabung Sekolah
+                                        @else
+                                            Mulai Memilih
+                                        @endif
                                     @elseif (auth()->user()->getroleNames()[0] == 'school')
                                         Kelola Sekolah
-                                    @else 
+                                    @else
                                         Kelola System
                                     @endif
                                 </button>

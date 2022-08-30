@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\School;
+use App\Models\Admin\UserJoinSchool;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,6 +15,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = UserJoinSchool::where('user_id', auth()->user()->id)->first();
+        if ($user) {
+            $school = School::find($user->school_id);
+            return view('home', compact('school'));
+        } else {
+            return view('home');
+        }
     }
 }
