@@ -91,7 +91,7 @@
                                     <div class="mb-3">
                                         <div class="form-label">Status Election</div>
                                         <label class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" name="status">
+                                            <input class="form-check-input" type="checkbox" name="status" checked>
                                             <span class="form-check-label">Active</span>
                                         </label>
                                     </div>
