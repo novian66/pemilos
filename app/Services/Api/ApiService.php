@@ -16,7 +16,7 @@ class ApiService extends ServiceBase
      */
     public function call(): ServiceResponse
     {
-        $data = School::with('user')->all();
-        return self::success($data, "Create success");
+        $data = School::all();
+        return self::success($data, "Get All School");
     }
 }
