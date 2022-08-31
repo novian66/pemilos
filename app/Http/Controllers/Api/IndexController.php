@@ -7,6 +7,8 @@ use App\Models\Admin\ElectionSchool;
 use App\Models\Admin\ElectionSchoolCandidate;
 use App\Models\Admin\ElectionVote;
 use App\Models\Admin\School;
+use App\Models\Admin\UserJoinSchool;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -85,6 +87,42 @@ class IndexController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Get All Vote By School ID',
+            'data' => $data
+        ], 200);
+    }
+
+    public function user()
+    {
+        $data = User::all();
+        if (count($data) == 0) {
+            # code...
+            return response()->json([
+                'status' => false,
+                'message' => 'Not Found Data',
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Get All User',
+            'data' => $data
+        ], 200);
+    }
+
+    public function user_school(Request $request)
+    {
+        $data = UserJoinSchool::with('user', 'school')->where('school_id', $request->school)->get();
+        if (count($data) == 0) {
+            # code...
+            return response()->json([
+                'status' => false,
+                'message' => 'Not Found Data',
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Get All User By School ID',
             'data' => $data
         ], 200);
     }
