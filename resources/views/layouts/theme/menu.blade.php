@@ -105,7 +105,7 @@
                             </span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('school-Manajemen') }}">
+                            <a class="dropdown-item" href="{{ route('school-management') }}">
                                 Manajemen Sekolah
                             </a>
                             <a class="dropdown-item" href="{{ route('school.api') }}">
