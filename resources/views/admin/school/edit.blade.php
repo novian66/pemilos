@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    Edit School : {{ $data->nama }}
+    Edit Sekolah : {{ $data->nama }}
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group mb-3 ">
-                                                <label class="form-label">Name School</label>
+                                                <label class="form-label">Nama Sekolah</label>
                                                 <div>
                                                     <input type="text"
                                                         class="form-control @error('nama') is-invalid @enderror"
@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3 ">
-                                                <label class="form-label">Phone School</label>
+                                                <label class="form-label">Nomor Telepon</label>
                                                 <div>
                                                     <input type="number"
                                                         class="form-control @error('phone') is-invalid @enderror"
@@ -52,7 +52,7 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <div class="form-label">Upload Logo School</div>
+                                                <div class="form-label">Logo Sekolah</div>
                                                 <input type="file"
                                                     class="form-control @error('image') is-invalid @enderror"
                                                     value="{{ old('') }}" id="imgInp" name="image">
@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3 ">
-                                                <label class="form-label">E Mail School</label>
+                                                <label class="form-label">Email Sekolah</label>
                                                 <div>
                                                     <input type="email"
                                                         class="form-control @error('email') is-invalid @enderror"
@@ -80,7 +80,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Address School</label>
+                                        <label class="form-label">Alamat Sekolah</label>
                                         <textarea class="form-control @error('address') is-invalid @enderror" name="address" name="example-textarea-input"
                                             rows="2" placeholder="Content..">{{ $data->adress }}</textarea>
                                         @error('address')
@@ -90,7 +90,7 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <div class="form-label">Status School</div>
+                                        <div class="form-label">Status Sekolah</div>
                                         <label class="form-check form-switch">
                                             @if ($data->status == 'active')
                                                 <input class="form-check-input" type="checkbox" checked>

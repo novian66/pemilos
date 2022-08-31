@@ -11,14 +11,14 @@
                     <div class="card p-3">
                         <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_xbf1be8x.json"
                             background="transparent" speed="1" loop autoplay></lottie-player>
-                        <h3 class="text-center text-muted">Token Election</h3>
-                        <p class="text-center text-muted">Harap Masukan Token Election School yang kamu dapatkan dari pihak
+                        <h3 class="text-center text-muted">Token Pemilihan</h3>
+                        <p class="text-center text-muted">Harap Masukan Token Pemilihan School yang kamu dapatkan dari pihak
                             sekolah</p>
                         <form action="" method="POST">
                             <div class="row g-2">
                                 @csrf
                                 <div class="col">
-                                    <input type="text" name="token" class="form-control" placeholder="Search for…">
+                                    <input type="text" name="token" class="form-control" placeholder="Masukkan Token">
                                 </div>
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-white btn-icon" aria-label="Button">

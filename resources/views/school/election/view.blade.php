@@ -17,7 +17,7 @@
                 <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
             </svg>
-            Delete
+            Hapus Kegiatan
         </a>
         <form id="hapus-election" action="{{ route('hapus-election', $data->id) }}" method="POST" class="d-none">
             @csrf @method('DELETE')
@@ -33,7 +33,7 @@
                     <div class="card p-2 shadow-sm rounded">
                         <div class="d-flex justify-content-between">
                             <h2 class="page-title text-muted">
-                                Candidate List
+                                List Kandidat
                             </h2>
                             <a href="{{ route('candidate-create', $data->id) }}"
                                 class="btn btn-secondary d-none d-sm-inline-block">
@@ -45,7 +45,7 @@
                                     <line x1="12" y1="5" x2="12" y2="19"></line>
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                 </svg>
-                                Create New
+                                Tambah Kandidat
                             </a>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                                                 <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
                                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
                                             </svg>
-                                            Delete
+                                            Hapus
                                         </a>
                                         <form id="hapus-candidate-{{ $paslon->id }}"
                                             action="{{ route('hapus-paslon', $paslon->id) }}"
@@ -101,7 +101,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3 ">
-                                        <label class="form-label">Title Election</label>
+                                        <label class="form-label">Nama Kegiatan</label>
                                         <div>
                                             <input type="text"
                                                 class="form-control @error('title') is-invalid @enderror"
@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-3 ">
-                                        <label class="form-label">Start Election</label>
+                                        <label class="form-label">Tanggal Mulai</label>
                                         <div>
                                             <input type="date" min="{{ date('Y-m-d') }}"
                                                 class="form-control @error('start') is-invalid @enderror"
@@ -132,7 +132,7 @@
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <div class="form-label">Upload Logo School</div>
+                                        <div class="form-label">Logo</div>
                                         <input type="file" class="form-control @error('image') is-invalid @enderror"
                                             id="imgInp" name="image">
                                         @error('image')
@@ -143,8 +143,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group mb-3 ">
-                                        <label class="form-label">Finish Election</label>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Tanggal Selesai</label>
                                         <div>
                                             <input type="date" min="{{ date('Y-m-d') }}"
                                                 class="form-control @error('end') is-invalid @enderror"
@@ -159,7 +159,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Deskripsi Election</label>
+                                <label class="form-label">Deskripsi Kegiatan</label>
                                 <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
                                     name="example-textarea-input" rows="2" placeholder="Content..">{{ $data->deskripsi }}</textarea>
                                 @error('deskripsi')
@@ -169,7 +169,7 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <div class="form-label">Status Election</div>
+                                <div class="form-label">Status Kegiatan</div>
                                 <label class="form-check form-switch">
                                     @if ($data->status == 'enable')
                                         <input class="form-check-input" type="checkbox" name="status" checked>
@@ -181,7 +181,7 @@
                                 </label>
                             </div>
                             <div class="form-footer">
-                                <button type="submit" class="btn btn-secondary w-100">Update</button>
+                                <button type="submit" class="btn btn-secondary w-100">Perbarui</button>
                             </div>
                         </form>
                     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    User Management
+    Manajemen Data
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
                             </div>
                             <!-- Card footer -->
                             <div class="card-footer text-center">
-                                <a href="{{route('users.list', $user->name)}}" class="btn btn-link">List Users</a>
+                                <a href="{{route('users.list', $user->name)}}" class="btn btn-link">Lihat Daftar</a>
                             </div>
                         </div>
                     </div>

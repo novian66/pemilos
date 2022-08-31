@@ -15,12 +15,12 @@
                             <form action="{{ route('kpu.api.acc', $api->id) }}" method="POST">
                                 @csrf
                                 <div class="mb-3">
-                                    <label class="form-label">Full Name</label>
+                                    <label class="form-label">Nama Lengkap</label>
                                     <input type="text" class="form-control" value="{{ $api->user->name }}" readonly
                                         disabled>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">School Name</label>
+                                    <label class="form-label">Nama Sekolah</label>
                                     <input type="text" class="form-control" value="{{ $api->school->nama }}" readonly
                                         disabled>
                                 </div>

@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    Add New Candidate
+    Tambah Kandidat
 @endsection
 
 @section('content')
@@ -21,7 +21,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group mb-3 ">
-                                                <label class="form-label">Cancidate Name</label>
+                                                <label class="form-label">Nama Kandidat</label>
                                                 <div>
                                                     <input type="text"
                                                         class="form-control @error('nama') is-invalid @enderror"
@@ -51,7 +51,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <div class="form-label">Upload Poster Candidate</div>
+                                        <div class="form-label">Poster Kandidat</div>
                                         <input type="file" class="form-control @error('image') is-invalid @enderror"
                                             id="imgInp" name="image">
                                         @error('image')
@@ -61,7 +61,7 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Deskripsi Candidate</label>
+                                        <label class="form-label">Deskripsi Kandidat</label>
                                         <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" name="example-textarea-input"
                                             rows="2" placeholder="Content..">{{ old('deskripsi') }}</textarea>
                                         @error('deskripsi')

@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    Homepage Siballu
+    Halaman Utama
 @endsection
 
 @section('content')
@@ -52,19 +52,17 @@
                             @endif
 
                             <div class="empty-action">
-                                <button type="button" class="btn btn-warning">
-                                    @if (auth()->user()->getroleNames()[0] == 'student')
-                                        @if (empty($school))
-                                            Gabung Sekolah
-                                        @else
-                                            Mulai Memilih
-                                        @endif
-                                    @elseif (auth()->user()->getroleNames()[0] == 'school')
-                                        Kelola Sekolah
+                                @if (auth()->user()->getroleNames()[0] == 'student')
+                                    @if (empty($school))
+                                        <a href="{{ route('dashboard') }}" class="btn btn-primary">Gabung Sekolah</a>
                                     @else
-                                        Kelola System
+                                        <a href="{{ route('dashboard') }}" class="btn btn-primary">Mulai Memilih</a>
                                     @endif
-                                </button>
+                                @elseif (auth()->user()->getroleNames()[0] == 'school')
+                                    <a href="{{ route('school-management') }}" class="btn btn-primary">Kelola Sekolah</a>
+                                @else
+                                    <a href="{{ route('school.index') }}" class="btn btn-primary">Kelola Sistem</a>
+                                @endif
                             </div>
                         </div>
                     </div>

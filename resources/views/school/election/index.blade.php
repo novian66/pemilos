@@ -11,7 +11,7 @@
                     <div class="card p-2">
                         <div class="d-flex justify-content-between">
                             <h2 class="page-title text-muted">
-                                Event Pemilu
+                                Kegiatan Pemilu
                             </h2>
                             <a href="{{ route('buat-election') }}" class="btn btn-secondary d-none d-sm-inline-block">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
@@ -22,7 +22,7 @@
                                     <line x1="12" y1="5" x2="12" y2="19"></line>
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                 </svg>
-                                Add Event
+                                Tambah Kegiatan
                             </a>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                                                 d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7">
                                             </path>
                                         </svg>
-                                        View
+                                        Lihat Kegiatan
                                     </a>
                                     <a class="card-btn text-danger"
                                         onclick="event.preventDefault(); document.getElementById('hapus-election-{{ $elec->id }}').submit();">
@@ -69,7 +69,7 @@
                                             <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
                                             <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
                                         </svg>
-                                        Delete
+                                        Hapus
                                     </a>
                                     <form id="hapus-election-{{ $elec->id }}"
                                         action="{{ route('hapus-election', $elec->id) }}" method="POST" class="d-none">
@@ -85,25 +85,6 @@
                     @endforelse
                 </div>
                 <div class="col-md-7">
-                    <div class="card p-2">
-                        <div class="d-flex justify-content-right">
-                            <button data-bs-toggle="modal" data-bs-target="#add-user"
-                                class="btn btn-secondary d-none d-sm-inline-block">
-                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg>
-                                Add User
-                            </button>
-                            <div>
-                                {!! $user->links() !!}
-                            </div>
-                        </div>
-                    </div>
                     <div class="row mt-3">
                         @forelse ($user as $user_join)
                             <div class="col-md-4">
@@ -134,7 +115,7 @@
                                                 <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
                                                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
                                             </svg>
-                                            Delete
+                                            Hapus
                                         </a>
                                     </div>
                                 </div>
@@ -148,47 +129,6 @@
                             @include('layouts.theme.empty')
                         @endforelse
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- modal --}}
-    <div class="modal modal-blur fade" id="add-user" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti
-                    dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit
-                    tempora totam unde.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal modal-blur fade" id="add-event" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti
-                    dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit
-                    tempora totam unde.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
                 </div>
             </div>
         </div>

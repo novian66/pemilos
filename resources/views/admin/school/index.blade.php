@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    School Management
+    Manajemen Sekolah
 @endsection
 
 @section('button-header')
@@ -13,7 +13,7 @@
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
-            Add School
+            Tambah Sekolah
         </a>
         <button type="button" class="btn btn-warning d-none d-sm-inline-block" data-bs-toggle="modal"
             data-bs-target="#modal-simple">
@@ -42,7 +42,7 @@
                     {!! $data->links() !!}
                 </div>
                 <form action="" method="GET">
-                <div class="row g-2">
+                    <div class="row g-2">
                         <div class="col">
                             <input type="text" name="cari" class="form-control" placeholder="Cari Sekolah disini">
                         </div>
@@ -86,7 +86,7 @@
                                             d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7">
                                         </path>
                                     </svg>
-                                    View
+                                    Lihat Sekolah
                                 </a>
                             </div>
                         </div>
@@ -119,8 +119,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="{{ url('dist/excell/schools.xlsx') }}" class="btn me-auto" data-bs-dismiss="modal">Get
-                            Sample</a>
+                        <a href="{{ url('dist/excell/schools.xlsx') }}" class="btn me-auto" data-bs-dismiss="modal">
+                            Ambil Sample
+                        </a>
                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Upload</button>
                     </div>
                 </form>

@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    Dashboard User
+    Dashboard Pengguna
 @endsection
 
 @section('button-header')
@@ -14,7 +14,7 @@
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
-            Join School
+            Gabung Sekolah
         </button>
     </div>
 @endsection
@@ -64,7 +64,7 @@
 
                 <div class="col-md-7">
                     <div class="card p-3 h-100">
-                        <h3 class="mb-0 text-center">Change Profile</h3>
+                        <h3 class="mb-0 text-center">Ubah Profil</h3>
                         <hr class="mt-3 mb-3">
                         <form action="{{ route('user.editProfile') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -72,7 +72,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mb-3 ">
-                                        <label class="form-label">Full Name</label>
+                                        <label class="form-label">Nama Lengkap</label>
                                         <div>
                                             <input type="text" class="form-control @error('nama') is-invalid @enderror"
                                                 value="{{ auth()->user()->name }}" name="nama">
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-3 ">
-                                        <label class="form-label">Email Adress</label>
+                                        <label class="form-label">Email</label>
                                         <div>
                                             <input type="email" class="form-control @error('email') is-invalid @enderror"
                                                 value="{{ auth()->user()->email }}" name="email" disabled>
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-3 ">
-                                        <label class="form-label">Phone Number</label>
+                                        <label class="form-label">Nomor Telepon</label>
                                         <div>
                                             <input type="number" class="form-control @error('phone') is-invalid @enderror"
                                                 name="phone" value="{{ auth()->user()->phone }}">
@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-3 ">
-                                        <label class="form-label">New Password</label>
+                                        <label class="form-label">Password</label>
                                         <div>
                                             <input type="password"
                                                 class="form-control @error('password') is-invalid @enderror"
@@ -166,7 +166,7 @@
                                 </div>
                             </div>
                             <div class="form-footer">
-                                <button type="submit" class="btn btn-secondary w-100">Update</button>
+                                <button type="submit" class="btn btn-secondary w-100">Perbarui</button>
                             </div>
                         </form>
                     </div>
@@ -188,10 +188,10 @@
                     <form action="{{ route('user.joinSchool') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3 ">
-                            <label class="form-label">Masukan Token Sekolah</label>
+                            <label class="form-label">Masukkan Token Sekolah</label>
                             <div>
                                 <input type="text" class="form-control" name="token" aria-describedby="emailHelp"
-                                    placeholder="Enter Your Token">
+                                    placeholder="Masukkan Token">
                             </div>
                         </div>
                         <div class="form-footer">
@@ -215,10 +215,10 @@
                     <form action="{{ route('user.event') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3 ">
-                            <label class="form-label">Masukan Token Kegiatan</label>
+                            <label class="form-label">Masukkan Token Kegiatan</label>
                             <div>
                                 <input type="text" class="form-control" name="token" aria-describedby="emailHelp"
-                                    placeholder="Enter Your Token">
+                                    placeholder="Masukkan Token">
                             </div>
                         </div>
                         <div class="form-footer">

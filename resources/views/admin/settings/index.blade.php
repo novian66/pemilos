@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    Settings Website
+    Pengaturan
 @endsection
 
 @section('button-header')
@@ -14,7 +14,7 @@
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
-            Join School
+            Gabung Sekolah
         </button>
     </div>
 @endsection
@@ -32,13 +32,13 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Join School</h5>
+                    <h5 class="modal-title">Gabung Sekolah</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group mb-3 ">
-                            <label class="form-label">Masukan Token Sekolah</label>
+                            <label class="form-label">Masukkan Token Sekolah</label>
                             <div>
                                 <input type="text" class="form-control" aria-describedby="emailHelp"
                                     placeholder="Enter Your Token">

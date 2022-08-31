@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    Add New Election
+    Tambah Kegiatan
 @endsection
 
 @section('content')
@@ -20,7 +20,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group mb-3 ">
-                                                <label class="form-label">Title Election</label>
+                                                <label class="form-label">Nama Kegiatan</label>
                                                 <div>
                                                     <input type="text"
                                                         class="form-control @error('title') is-invalid @enderror"
@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3 ">
-                                                <label class="form-label">Start Election</label>
+                                                <label class="form-label">Tanggal Mulai</label>
                                                 <div>
                                                     <input type="date" min="{{date('Y-m-d')}}"
                                                         class="form-control @error('start') is-invalid @enderror"
@@ -51,7 +51,7 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <div class="form-label">Upload Logo School</div>
+                                                <div class="form-label">Logo Sekolah</div>
                                                 <input type="file"
                                                     class="form-control @error('image') is-invalid @enderror" id="imgInp"
                                                     name="image">
@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3 ">
-                                                <label class="form-label">Finish Election</label>
+                                                <label class="form-label">Tanggal Selesai</label>
                                                 <div>
                                                     <input type="date" min="{{date('Y-m-d')}}"
                                                         class="form-control @error('end') is-invalid @enderror"
@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Deskripsi Election</label>
+                                        <label class="form-label">Deskripsi Kegiatan</label>
                                         <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" name="example-textarea-input"
                                             rows="2" placeholder="Content..">{{ old('deskripsi') }}</textarea>
                                         @error('deskripsi')
@@ -89,7 +89,7 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <div class="form-label">Status Election</div>
+                                        <div class="form-label">Status Kegiatan</div>
                                         <label class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" name="status" checked>
                                             <span class="form-check-label">Active</span>

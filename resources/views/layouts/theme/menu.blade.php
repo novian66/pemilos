@@ -12,17 +12,17 @@
         <div class="nav-item dropdown">
             <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                 aria-label="Open user menu">
-                <span class="avatar avatar-sm">UA</span>
+                <span class="avatar avatar-sm">FB</span>
                 <div class="d-none d-xl-block ps-2">
                     <div>{{ auth()->user()->name ?? '' }}</div>
                     <div class="mt-1 small text-muted">Role : {{ auth()->user()->getRoleNames()[0] }}</div>
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="{{route('user.editProfile')}}" class="dropdown-item">Profile</a>
+                <a href="{{ route('user.editProfile') }}" class="dropdown-item">Profile</a>
                 <a onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();"
-                    class="dropdown-item">Logout</a>
+                    class="dropdown-item">Keluar</a>
             </div>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                 @csrf
@@ -67,21 +67,21 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                Kpu Tools
+                                Pengaturan
                             </span>
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('users.all') }}">
-                                Users Management
+                                Manajemen Data
                             </a>
                             <a class="dropdown-item" href="{{ route('school.index') }}">
-                                School management
+                                Manajemen Sekolah
                             </a>
                             <a class="dropdown-item" href="{{ route('settings') }}">
-                                Election History
+                                Riwayat Kegiatan
                             </a>
                             <a class="dropdown-item" href="{{ route('kpu.api') }}">
-                                Rest API  <span class="badge text-bg-danger ms-3">New</span>
+                                Rest API <span class="badge text-bg-danger ms-3">New</span>
                             </a>
                         </div>
                     </li>
@@ -101,18 +101,18 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                Tools School
+                                Pengaturan
                             </span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('school-management') }}">
-                                School Management
+                            <a class="dropdown-item" href="{{ route('school-Manajemen') }}">
+                                Manajemen Sekolah
                             </a>
                             <a class="dropdown-item" href="{{ route('school.api') }}">
                                 Rest API Token
                             </a>
                             <a class="dropdown-item" href="./gallery.html">
-                                Timses Management
+                                Manajemen Timses
                             </a>
                         </div>
                     </li>
@@ -132,7 +132,7 @@
                                 </svg>
                             </span>
                             <span class="nav-link-title">
-                                Users
+                                Profile
                             </span>
                         </a>
                     </li>

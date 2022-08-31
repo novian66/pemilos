@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    Candidate
+    Kandidat
 @endsection
 
 @section('content')
