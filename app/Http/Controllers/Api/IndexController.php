@@ -7,17 +7,14 @@ use App\Models\Admin\ElectionSchool;
 use App\Models\Admin\ElectionSchoolCandidate;
 use App\Models\Admin\ElectionVote;
 use App\Models\Admin\School;
+use App\Services\Api\ApiService;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
     public function school(Request $request)
     {
-        $data = School::with('user')->paginate(10);
-        return response()->json([
-            'status' => true,
-            'data' => $data
-        ], 200);
+       return (new ApiService());
     }
 
     public function election(Request $request)
