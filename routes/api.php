@@ -19,4 +19,6 @@ Route::middleware(['checkHeader'])->group(function () {
     Route::post('election', [App\Http\Controllers\Api\IndexController::class, 'election']);
     Route::post('candidate', [App\Http\Controllers\Api\IndexController::class, 'candidate']);
     Route::post('vote', [App\Http\Controllers\Api\IndexController::class, 'vote']);
+    Route::post('user', [App\Http\Controllers\Api\IndexController::class, 'user']);
+    Route::post('user/school', [App\Http\Controllers\Api\IndexController::class, 'user_school']);
 });
