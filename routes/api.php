@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('login', [App\Http\Controllers\Api\IndexController::class, 'login']);
 
 Route::middleware(['checkHeader'])->group(function () {
     Route::post('school', [App\Http\Controllers\Api\IndexController::class, 'school']);
@@ -21,4 +22,6 @@ Route::middleware(['checkHeader'])->group(function () {
     Route::post('vote', [App\Http\Controllers\Api\IndexController::class, 'vote']);
     Route::post('user', [App\Http\Controllers\Api\IndexController::class, 'user']);
     Route::post('user/school', [App\Http\Controllers\Api\IndexController::class, 'user_school']);
+    Route::post('send-iot', [App\Http\Controllers\Api\IndexController::class, 'send']);
+
 });

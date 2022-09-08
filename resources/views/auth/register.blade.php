@@ -13,6 +13,16 @@
         <form class="card card-md" action="{{ route('register') }}" method="post">
             @csrf
             <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Nomor Nisn</label>
+                    <input type="number" class="form-control @error('nisn') is-invalid @enderror" name="nisn"
+                        value="{{ old('nisn') }}" placeholder="Nomor Nisn" required autocomplete="off">
+                    @error('nisn')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">

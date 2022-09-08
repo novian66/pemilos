@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\School;
 use App\Models\Api\ApiToken;
+use App\Models\User;
 use App\Utils\RandomStringGenerator;
 use Illuminate\Http\Request;
 
@@ -72,4 +73,5 @@ class ResquestApiController extends Controller
 
         return redirect()->route('kpu.api')->with('success', 'Status Hass Been Update');
     }
+
 }

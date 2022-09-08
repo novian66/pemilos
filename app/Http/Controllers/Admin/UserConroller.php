@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Utils\RandomStringGenerator;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -43,6 +44,7 @@ class UserConroller extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'token' => (new RandomStringGenerator)->generate(6),
         ]);
         $user->assignRole($request->role);
         return redirect()->route('users.all')->with('success', 'User Berhasil Ditambahkan');

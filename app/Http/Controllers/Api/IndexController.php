@@ -10,6 +10,7 @@ use App\Models\Admin\School;
 use App\Models\Admin\UserJoinSchool;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class IndexController extends Controller
 {
@@ -125,5 +126,54 @@ class IndexController extends Controller
             'message' => 'Get All User By School ID',
             'data' => $data
         ], 200);
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'token'   => 'required',
+        ], [
+            'token.required' => 'Token Wajib di isi'
+        ]);
+
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $user = User::whereToken($request->token)->first();
+        if (empty($user)) {
+            # jika token user kosong maka
+            return response()->json([
+                'status' => false,
+                'message' => 'Auth Failed, Token Wronng !!',
+            ], 404);
+        } else {
+            # jika ada token maka
+            return response()->json([
+                'status' => true,
+                'message' => 'Berhasil Login',
+                'data' => $user
+            ], 200);
+        }
+    }
+
+    public function send(Request $request)
+    {
+        $data = $request->all();
+        try {
+            ElectionVote::insert($data);
+            return response()->json([
+                'status' => true,
+                'message' => 'Blast Vote Berhasil di upload',
+            ], 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'status' => true,
+                'message' => 'Blast Vote Berhasil di upload',
+                'data' => $th
+            ], 500);
+        }
     }
 }
