@@ -68,7 +68,7 @@
                                             style="background-image: url({{ asset('dist/img/logo/' . $data->logo) }})"></span>
                                         <div>
                                             <div>{{ $elec->title }}</div>
-                                            <div class="text-muted">{{ $data->nama }}</div>
+                                            <div class="text-muted">{{ $elec->deskripsi }}</div>
                                         </div>
                                         <div class="ms-auto">
                                             <a href="{{ route('quickcount') }}" class="text-muted">
@@ -129,7 +129,9 @@
                                         <span class="avatar avatar-xl mb-3 avatar-rounded"
                                             style="background-image: url(./static/avatars/000m.jpg)"></span>
                                         <h3 class="m-0 mb-1">{{ $user_join->user->name }}</h3>
-                                        <div class="text-muted">{{ $user_join->user->email }}</div>
+                                        <div class="text-muted">Email: {{ $user_join->user->email }}</div>
+                                        <div class="text-muted">NISN : {{ $user_join->user->nisn }}</div>
+                                        <div class="text-muted">Token: {{ $user_join->user->token }}</div>
                                         <div class="mt-3">
                                             <span class="badge bg-purple-lt">{{ $user_join->status }}</span>
                                         </div>

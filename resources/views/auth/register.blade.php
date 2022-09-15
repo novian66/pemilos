@@ -7,19 +7,19 @@
     <div class="container-tight py-4">
         <div class="text-center mb-4">
             <a href="{{ url('/') }}" class="navbar-brand navbar-brand-autodark">
-                <img src="{{ asset('dist/img/logo.svg') }}" height="36" alt="">
+                <img src="{{ asset('dist/img/logo.png') }}" height="36" alt="">
             </a>
         </div>
         <form class="card card-md" action="{{ route('register') }}" method="post">
             @csrf
             <div class="card-body">
                 <div class="mb-3">
-                    <label class="form-label">Nomor Nisn</label>
+                    <label class="form-label">Nomor NISN</label>
                     <input type="number" class="form-control @error('nisn') is-invalid @enderror" name="nisn"
                         value="{{ old('nisn') }}" placeholder="Nomor Nisn" required autocomplete="off">
                     @error('nisn')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>NISN tidak sesuai</strong>
                         </span>
                     @enderror
                 </div>
@@ -29,11 +29,6 @@
                             <label class="form-label">Nama Lengkap</label>
                             <input type="name" class="form-control @error('name') is-invalid @enderror" name="name"
                                 value="{{ old('name') }}" placeholder="Nama lengkap" required autocomplete="off">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -43,7 +38,7 @@
                                 value="{{ old('email') }}" placeholder="Email" required autocomplete="off">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong>Email tidak valid</strong>
                                 </span>
                             @enderror
                         </div>
@@ -59,7 +54,7 @@
                                     name="password" placeholder="Kata Sandi" autocomplete="off" required autocomplete="off">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Kata sandi harus lebih dari 8</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -72,9 +67,14 @@
                                 Ulangi Kata Sandi
                             </label>
                             <div class="input-group input-group-flat">
-                                <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
                                     name="password_confirmation" placeholder="Kata Sandi" autocomplete="off" required
                                     autocomplete="off">
+                                @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Kata sandi tidak sesuai</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                         <input type="checkbox" name="tos" class="form-check-input @error('tos') is-invalid @enderror" />
                         @error('tos')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <strong>Anda harus setuju dengan aturan yang ada</strong>
                             </span>
                         @enderror
                         <span class="form-check-label">Saya Setuju dengan Aturan Yang Ada</span>

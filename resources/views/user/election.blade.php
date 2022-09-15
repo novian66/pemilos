@@ -21,8 +21,9 @@
                                             <div class="text-muted">{{ $item->description }}</div>
                                         </div>
                                         <div class="d-flex">
-                                            <a href="{{ route('user.vote', ['id' => $item->id, 'school_id' => $item->school_id, 'election_id' => $item->election_school_id]) }}"
-                                                class="card-btn text-primary">
+                                            <a href="javascript:void(0)"
+                                                action="{{ route('user.vote', ['id' => $item->id, 'school_id' => $item->school_id, 'election_id' => $item->election_school_id]) }}"
+                                                onclick="votePaslon(this)" class="card-btn text-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                     class="icon icon-tabler icon-tabler-color-picker" width="24"
                                                     height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -49,3 +50,21 @@
         </div>
     </div>
 @endsection
+
+<script type="text/javascript">
+    function votePaslon(link) {
+        Swal.fire({
+                icon: 'warning',
+                title: 'Yakin ingin memilih?',
+                text: 'Anda tidak dapat mengubah pilihan anda!',
+                confirmButtonText: 'Ya',
+                showCancelButton: true,
+                dangerMode: true,
+            })
+            .then(result => {
+                if (result['isConfirmed']) {
+                    window.location = $(link).attr('action');
+                }
+            });
+    }
+</script>

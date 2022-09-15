@@ -59,7 +59,7 @@
                                         <h3 class="m-0 mb-1">{{ $paslon->nama }}</h3>
                                         <div class="text-muted">Urutan Ke : {{ $paslon->urutan }}</div>
                                         <div class="mt-3">
-                                            <span class="badge bg-purple-lt">28/08/2022</span>
+                                            {{ $paslon->description }}
                                         </div>
                                     </div>
                                     <div class="d-flex">
@@ -83,8 +83,8 @@
                                             Hapus
                                         </a>
                                         <form id="hapus-candidate-{{ $paslon->id }}"
-                                            action="{{ route('hapus-paslon', $paslon->id) }}"
-                                            method="POST" class="d-none">
+                                            action="{{ route('hapus-paslon', $paslon->id) }}" method="POST"
+                                            class="d-none">
                                             @csrf @method('DELETE')
                                         </form>
                                     </div>
@@ -167,6 +167,10 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Token Kegiatan</label>
+                                <p>{{ $data->token }}</p>
                             </div>
                             <div class="mb-3">
                                 <div class="form-label">Status Kegiatan</div>

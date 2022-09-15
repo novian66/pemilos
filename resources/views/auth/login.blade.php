@@ -19,7 +19,7 @@
                         value="{{ old('email') }}" placeholder="Email" required autocomplete="off">
                     @error('email')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Email tidak terdaftar!</strong>
                         </span>
                     @enderror
                 </div>
@@ -32,7 +32,7 @@
                             placeholder="Kata Sandi" autocomplete="off" required autocomplete="off">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                                <strong>Password salah!</strong>
                             </span>
                         @enderror
                     </div>

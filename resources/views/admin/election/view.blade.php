@@ -19,7 +19,9 @@
             </svg>
             Delete
         </a>
-        <form id="hapus-election" action="{{ route('election.destroy', ['id' => $school->id, 'election_id' => $data->id]) }}" method="POST" class="d-none">
+        <form id="hapus-election"
+            action="{{ route('election.destroy', ['id' => $school->id, 'election_id' => $data->id]) }}" method="POST"
+            class="d-none">
             @csrf @method('DELETE')
         </form>
     </div>
@@ -33,7 +35,7 @@
                     <div class="card p-2 shadow-sm rounded">
                         <div class="d-flex justify-content-between">
                             <h2 class="page-title text-muted">
-                                Candidate List
+                                List Kandidat
                             </h2>
                             <a href="{{ route('candidate.create', ['id' => $school->id, 'election_id' => $data->id]) }}"
                                 class="btn btn-secondary d-none d-sm-inline-block">
@@ -45,7 +47,7 @@
                                     <line x1="12" y1="5" x2="12" y2="19"></line>
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                 </svg>
-                                Create New
+                                Tambah Kandidat
                             </a>
                         </div>
                     </div>
@@ -59,7 +61,7 @@
                                         <h3 class="m-0 mb-1">{{ $paslon->nama }}</h3>
                                         <div class="text-muted">Urutan Ke : {{ $paslon->urutan }}</div>
                                         <div class="mt-3">
-                                            <span class="badge bg-purple-lt">28/08/2022</span>
+                                            {{ $paslon->description }}
                                         </div>
                                     </div>
                                     <div class="d-flex">
@@ -113,7 +115,7 @@
                                     <div class="form-group mb-3 ">
                                         <label class="form-label">Tanggal Mulai</label>
                                         <div>
-                                            <input type="date" min="{{date('Y-m-d')}}"
+                                            <input type="date" min="{{ date('Y-m-d') }}"
                                                 class="form-control @error('start') is-invalid @enderror"
                                                 value="{{ $data->start }}" name="start" id="datetime">
                                             @error('start')
@@ -141,7 +143,8 @@
                                     <div class="form-group mb-3 ">
                                         <label class="form-label">Tanggal Selesai</label>
                                         <div>
-                                            <input type="date" min="{{date('Y-m-d')}}" class="form-control @error('end') is-invalid @enderror"
+                                            <input type="date" min="{{ date('Y-m-d') }}"
+                                                class="form-control @error('end') is-invalid @enderror"
                                                 value="{{ $data->end }}" name="end" id="datetime">
                                             @error('end')
                                                 <span class="invalid-feedback" role="alert">
@@ -161,6 +164,10 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Token Kegiatan</label>
+                                <p>{{ $data->token }}</p>
                             </div>
                             <div class="mb-3">
                                 <div class="form-label">Status Kegiatan</div>
