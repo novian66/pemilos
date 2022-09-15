@@ -58,6 +58,7 @@
                 title: 'Yakin ingin memilih?',
                 text: 'Anda tidak dapat mengubah pilihan anda!',
                 confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal',
                 showCancelButton: true,
                 dangerMode: true,
             })
