@@ -71,4 +71,46 @@ class CandidateController extends Controller
         $candidate->delete();
         return redirect()->back()->with('success', 'Candidate Hass Been Deleted');
     }
+
+    public function view($id_candidate)
+    {
+        $data = ElectionSchoolCandidate::findOrFail($id_candidate);
+        $id_election = ElectionSchool::find($data->election_school_id);
+        return view('school.candidate.view', compact('data', 'id_election'));
+    }
+
+    public function update(Request $request, $id_candidate)
+    {
+        $data = ElectionSchoolCandidate::find($id_candidate);
+        $election = ElectionSchool::find($data->election_school_id);
+        $request->validate([
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'image' => 'image|mimes:png,jpg'
+        ], [
+            'nama.required' => 'Nama Paslon Masih Kosong',
+            'deskripsi.required' => 'Deskripsi paslon kosong',
+            'image.image' => 'FOrmat gambar salah',
+            'image.mimes' => 'Gambar hanya JPG dan PNG'
+        ]);
+
+        if ($request->image) {
+            # code...
+            unlink(public_path('dist/img/candidate/'. $data->poster));
+            $ImageName = time() . '.' . $request->image->extension();
+            $data->update([
+                'nama' => $request->nama,
+                'description' => $request->deskripsi,
+                'poster' => $ImageName,
+            ]);
+            $request->image->move(public_path('dist/img/candidate/'), $ImageName);
+        } else {
+            # code...
+            $data->update([
+                'nama' => $request->nama,
+                'description' => $request->deskripsi,
+            ]);
+        }
+        return redirect()->route('lihat-election', $election->id)->with('success', 'Candidate hass been update');
+    }
 }

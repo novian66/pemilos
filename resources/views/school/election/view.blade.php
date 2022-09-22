@@ -63,7 +63,8 @@
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <a href="#" class="card-btn">
+                                        <a href="{{ route('candidate-view', ['id' => $data->id, 'id_candidate' => $paslon->id]) }}"
+                                            class="card-btn">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="icon icon-tabler icon-tabler-pencil me-2" width="24"
                                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"

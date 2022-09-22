@@ -87,6 +87,8 @@ Route::middleware(['auth', 'dontback'])->group(function () {
 
         Route::get('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'create'])->name('candidate-create');
         Route::post('/election/{id}/candidate', [App\Http\Controllers\School\CandidateController::class, 'store'])->name('candidate-store');
+        Route::get('/election/{id}/candidate/{id_candidate}', [App\Http\Controllers\School\CandidateController::class, 'view'])->name('candidate-view');
+        Route::post('/election/{id}/candidate/{id_candidate}', [App\Http\Controllers\School\CandidateController::class, 'update'])->name('candidate-update');
         Route::delete('candidate/{id}', [App\Http\Controllers\School\CandidateController::class, 'destroy'])->name('hapus-paslon');
 
         Route::get('/api', [App\Http\Controllers\Api\ResquestApiController::class, 'index'])->name('school.api');
