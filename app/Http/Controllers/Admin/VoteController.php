@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\ElectionSchool;
+use App\Models\Admin\ElectionSchoolCandidate;
 use App\Models\Admin\ElectionVote;
-use Illuminate\Http\Request;
+use DateTime;
 
 class VoteController extends Controller
 {
@@ -13,9 +15,11 @@ class VoteController extends Controller
         $vote = ElectionVote::where([
             'user_id' => auth()->user()->id,
         ])->first();
+
         if ($vote) {
             return redirect()->route('dashboard')->with('error', 'Anda Sudah Memilih');
         }
+
         ElectionVote::create([
             'user_id' => auth()->user()->id,
             'school_id' => $school_id,
@@ -23,6 +27,15 @@ class VoteController extends Controller
             'election_school_candidate_id' => $id,
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Anda Berhasil Memilih');
+        $eventData = ElectionSchool::where([
+            'id' => $election_id,
+        ])->first();
+        $candidateData = ElectionSchoolCandidate::where([
+            'id' => $id,
+        ])->first();
+        $dt = new DateTime();
+        $date = $dt->format('d-m-Y H:i');
+
+        return view('user.success', compact('eventData', 'candidateData', 'date'));
     }
 }
