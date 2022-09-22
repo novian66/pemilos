@@ -91,6 +91,10 @@ Route::middleware(['auth', 'dontback'])->group(function () {
 
         Route::get('/api', [App\Http\Controllers\Api\ResquestApiController::class, 'index'])->name('school.api');
         Route::post('/api', [App\Http\Controllers\Api\ResquestApiController::class, 'store'])->name('request.api');
+
+        Route::get('/export/school', [App\Http\Controllers\School\ExcellController::class, 'export_user'])->name('school.export_user');
+        Route::get('/export/election', [App\Http\Controllers\School\ExcellController::class, 'export_election'])->name('school.export_election');
+
     });
 
     // routing users

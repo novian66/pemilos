@@ -14,93 +14,134 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="mt-3">
-                        <!-- Page pre-title -->
-                        <div class="page-pretitle">
-                            {{ $election->school->nama }}
-                        </div>
-                        <h2 class="page-title mb-3">
-                            {{ $election->title }}
-                        </h2>
-                        <div class="row">
-                            @foreach ($list_candidate as $item)
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <div class="card-body p-4 text-center">
-                                            <span class="avatar avatar-xl mb-3 avatar-rounded"
-                                                style="background-image: url({{ asset('dist/img/candidate/'. $item->poster) }})"></span>
-                                            <h3 class="m-0 mb-1">{{ $item->nama }}</h3>
-                                            <div class="text-muted">Urutan Ke : {{ $item->urutan }}</div>
-                                            <div class="mt-3">
-                                                <span class="badge bg-sencodary-lt">Jumlah Suara :
-                                                    {{ count($item->hitung) }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                        <div class="card card-sm p-2">
+                            <canvas id="totalChart" height="100" width="100"></canvas>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="page-pretitle mt-3">
+                        {{ $election->school->nama }}
+                    </div>
+                    <h2 class="page-title mb-3">
+                        {{ $election->title }}
+                    </h2>
+                    @foreach ($list_candidate as $item)
+                        <div class="card">
+                            <div class="card-header">
+                                <div>
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="avatar"
+                                                style="background-image: url({{ asset('dist/img/candidate/' . $item->poster) }})"></span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card-title">{{ $item->nama }}</div>
+                                            <div class="card-subtitle">Paslon : {{ $item->urutan }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-actions">
+                                    <button type="button" class="btn">
+                                        Suara : {{ count($item->hitung) }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@section('script')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    <script type="text/javascript">
-        var ctx = document.getElementById('myChart').getContext('2d');
-        const paslon = JSON.parse(`<?php echo $paslon; ?>`);
-        const suara = JSON.parse(`<?php echo $suara; ?>`);
+    @section('script')
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+        <script type="text/javascript">
+            var ctx = document.getElementById('myChart').getContext('2d');
+            const paslon = JSON.parse(`<?php echo $paslon; ?>`);
+            const suara = JSON.parse(`<?php echo $suara; ?>`);
 
-        // The data for our dataset
-        const data = {
-            labels: paslon,
-            datasets: [{
-                label: 'My First Dataset',
-                data: suara,
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)'
-                ],
-                hoverOffset: 4
-            }]
-        };
+            // The data for our dataset
+            const data = {
+                labels: paslon,
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: suara,
+                    backgroundColor: ['#4dc9f6',
+                        '#f67019',
+                        '#f53794',
+                        '#537bc4',
+                        '#acc236',
+                        '#166a8f',
+                        '#00a950',
+                        '#58595b',
+                        '#8549ba'
+                    ],
+                    hoverOffset: 4
+                }]
+            };
 
-        var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'doughnut',
-            data: data,
-            // Configuration options
-            options: {
-                layout: {
-                    padding: 10,
-                },
-                legend: {
-                    position: 'bottom',
-                },
-                title: {
-                    display: true,
-                    text: 'Precipitation in Toronto'
-                },
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'doughnut',
+                data: data,
+                // Configuration options
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
                             display: true,
-                            labelString: 'Precipitation in mm'
+                            text: 'Rekapitulasi'
                         }
-                    }],
-                    xAxes: [{
-                        scaleLabel: {
+                    }
+                },
+            });
+        </script>
+
+        <script type="text/javascript">
+            var get_total = document.getElementById('totalChart').getContext('2d');
+            const suara_masuk = JSON.parse(`<?php echo $suara_masuk; ?>`);
+            const total_pemilih = JSON.parse(`<?php echo $total_pemilih; ?>`);
+
+            // The data for our dataset
+            const data_total = {
+                labels: ['Total Pemilih', 'Suara Masuk'],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: [
+                        total_pemilih, suara_masuk
+                    ],
+                    backgroundColor: [
+                        '#00a950',
+                        '#58595b',
+                        '#8549ba'
+                    ],
+                    hoverOffset: 4
+                }]
+            };
+
+            var totalchart = new Chart(get_total, {
+                // The type of chart we want to create
+                type: 'doughnut',
+                data: data_total,
+                // Configuration options
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
                             display: true,
-                            labelString: 'Month of the Year'
+                            text: 'Diagram Pemilih'
                         }
-                    }]
-                }
-            }
-        });
-    </script>
-@endsection
+                    }
+                },
+            });
+        </script>
+    @endsection

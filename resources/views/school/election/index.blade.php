@@ -3,6 +3,66 @@
     {{ $data->nama }}
 @endsection
 
+@section('button-header')
+    <div class="d-flex">
+        <a href="{{ route('school.export_user') }}" class="btn btn-warning shadow-sm d-none d-sm-inline-block">
+            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-export" width="24"
+                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                <path d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3"></path>
+            </svg>
+            Export Excell
+        </a>
+        <button type="button" class="btn btn-info shadow-sm d-none d-sm-inline-block ms-3" data-bs-toggle="modal"
+        data-bs-target="#modal-simple">
+            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-export" width="24"
+                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                <path d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3"></path>
+            </svg>
+            Import Excell
+        </button>
+        <div class="dropdown ms-3">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Action
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <a class="dropdown-item" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Tambah Kegiatan
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Tambah Siswa/i
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+@endsection
+
 @section('content')
     <div class="page-body">
         <div class="container-xl">
@@ -59,9 +119,10 @@
                                     </a>
                                     <a class="card-btn text-danger"
                                         onclick="event.preventDefault(); document.getElementById('hapus-election-{{ $elec->id }}').submit();">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-danger" width="24"
-                                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-danger"
+                                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                             <line x1="4" y1="7" x2="20" y2="7"></line>
                                             <line x1="10" y1="11" x2="10" y2="17"></line>
@@ -129,6 +190,34 @@
                     <div class="mt-4">
                         {!! $user->links() !!}
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- import --}}
+    <div class="modal modal-blur fade" id="modal-simple" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Pengguna</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('user.joinSchool') }}" method="POST">
+                        @csrf
+                        <div class="form-group mb-3 ">
+                            <label class="form-label">Masukan File Excell</label>
+                            <div>
+                                <input type="file" class="form-control" name="token" aria-describedby="emailHelp"
+                                    placeholder="Masukkan Token">
+                            </div>
+                        </div>
+                        <div class="form-footer text-center">
+                            <a href="" class="btn btn-warning">Unduh Sampel</a>
+                            <button type="submit" class="btn btn-secondary ms-3">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

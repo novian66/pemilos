@@ -63,6 +63,17 @@
                                         </div>
                                     </div>
                                     <div class="d-flex">
+                                        <a href="#" class="card-btn">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-pencil me-2" width="24"
+                                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
+                                                <line x1="13.5" y1="6.5" x2="17.5" y2="10.5"></line>
+                                            </svg>
+                                            Edit
+                                        </a>
                                         <a class="card-btn text-danger"
                                             onclick="event.preventDefault(); document.getElementById('hapus-candidate-{{ $paslon->id }}').submit();">
                                             <!-- Download SVG icon from http://tabler-icons.io/i/phone -->
@@ -94,6 +105,25 @@
                     </div>
                 </div>
                 <div class="col-md-7">
+                    @php
+                        $now = date('Y-m-d', strtotime(date('Y-m-d')));
+                        $deadline = date('Y-m-d', strtotime($data->end));
+                    @endphp
+                    @if ($now >= $deadline)
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle me-1"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                <polyline points="11 12 12 12 12 16 13 16"></polyline>
+                            </svg>
+                            <div>
+                                Kegiatan Telah Selesai, Silahkan Upload Berita Acara <a href="#">disini</a>
+                            </div>
+                        </div>
+                    @endif
                     <div class="card p-2 shadow-sm rounded">
                         <form action="{{ route('ganti', $data->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
