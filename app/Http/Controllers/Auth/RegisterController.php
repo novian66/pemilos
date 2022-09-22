@@ -54,7 +54,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'nisn' => ['required', 'numeric', 'min:8',],
+            'nisn' => ['required', 'numeric', 'min:8'],
+            'nik' => ['numeric', 'min:16'],
+            'phone' => ['required', 'numeric', 'min:10'],
+            'ultah' => ['required', 'date'],
+            'jenis_kelamin' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'tos'      => ['required']
@@ -74,7 +78,11 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'token' => (new RandomStringGenerator)->generate(6),
-            'nisn' => $data['nisn']
+            'nisn' => $data['nisn'],
+            'nik' => $data['nik'],
+            'phone' => $data['phone'],
+            'jenis_kelamin' => $data['jenis_kelamin'],
+            'birthday' => $data['ultah']
         ]);
 
         $role = Role::whereName('student')->first();
