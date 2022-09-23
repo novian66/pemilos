@@ -25,6 +25,11 @@ Route::middleware(['auth', 'dontback'])->group(function () {
     // dashboard all users
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    // about
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
+
     // realtime quickcount
     Route::get('quickcount', [App\Http\Controllers\QuickcountController::class, 'index'])->name('quickcount');
     Route::post('quickcount', [App\Http\Controllers\QuickcountController::class, 'quickcount'])->name('hasil');
@@ -96,7 +101,6 @@ Route::middleware(['auth', 'dontback'])->group(function () {
 
         Route::get('/export/school', [App\Http\Controllers\School\ExcellController::class, 'export_user'])->name('school.export_user');
         Route::get('/export/election', [App\Http\Controllers\School\ExcellController::class, 'export_election'])->name('school.export_election');
-
     });
 
     // routing users
