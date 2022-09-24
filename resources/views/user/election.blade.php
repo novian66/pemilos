@@ -11,8 +11,8 @@
                     <div class="container-xl">
                         <div class="row">
                             @forelse ($candidate as $item)
-                                <div class="col-md-3">
-                                    <div class="card">
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
                                         <div class="card-body p-4 text-center">
                                             <span class="avatar avatar-xl mb-3 avatar-rounded"
                                                 style="background-image: url({{ asset('dist/img/candidate/' . $item->poster) }})">

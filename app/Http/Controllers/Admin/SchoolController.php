@@ -93,7 +93,8 @@ class SchoolController extends Controller
         $user = UserJoinSchool::query()
             ->with('user')->where('school_id', $data->id)
             ->paginate(8);
-        return view('admin.school.view', compact('data', 'election', 'user'));
+        $totalUser = UserJoinSchool::where('school_id', $data->id)->count();
+        return view('admin.school.view', compact('data', 'election', 'user', 'totalUser'));
     }
 
     public function edit($id)

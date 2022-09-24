@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    {{ $data->nama }}
+    {{ $data->nama }} <br>
 @endsection
 
 @section('button-header')
@@ -61,7 +61,7 @@
                     </div>
                     @forelse ($election as $elec)
                         <div class="mt-3">
-                            <div class="card card-sm">
+                            <div class="card card-sm mb-3">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
                                         <span class="avatar me-3 rounded"
@@ -121,6 +121,13 @@
                     @endforelse
                 </div>
                 <div class="col-md-7">
+                    <div class="card p-2">
+                        <div class="d-flex justify-content-between">
+                            <h2 class="page-title text-muted">
+                                Jumlah Siswa/i: {{ $totalUser }}
+                            </h2>
+                        </div>
+                    </div>
                     <div class="row mt-3">
                         @forelse ($user as $user_join)
                             <div class="col-md-4">
@@ -159,7 +166,7 @@
                                 </div>
                             </div>
 
-                            @empty
+                        @empty
                             @include('layouts.theme.empty')
                         @endforelse
                     </div>
