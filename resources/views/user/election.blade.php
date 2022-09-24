@@ -18,7 +18,7 @@
                                                 style="background-image: url({{ asset('dist/img/candidate/' . $item->poster) }})">
                                             </span>
                                             <h3 class="m-0 mb-1">{{ $item->nama }}</h3>
-                                            <div class="text-muted">{{ $item->description }}</div>
+                                            <div class="text-muted">{!! $item->description !!}</div>
                                         </div>
                                         <div class="d-flex">
                                             <a href="javascript:void(0)"

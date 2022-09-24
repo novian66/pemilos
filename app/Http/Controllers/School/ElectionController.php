@@ -12,14 +12,36 @@ use Illuminate\Http\Request;
 
 class ElectionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data = School::where(['user_id' => auth()->user()->id])->first();
-        $election = ElectionSchool::where('school_id', $data->id)->get();
+        $election = ElectionSchool::with('vote')->where('school_id', $data->id)->get();
+        $name = $request->name;
+        $jk = $request->jk;
+        $type = $request->type;
         $user = UserJoinSchool::query()
             ->with('user')->where('school_id', $data->id)
+            ->when($name, function ($query) use ($name) {
+                $query->whereHas('user', function ($query) use ($name) {
+                    $query->where('name',  'like', '%' . $name . '%');
+               });
+            })
+            ->when($jk, function ($query) use ($jk) {
+                $query->whereHas('user', function ($query) use ($jk) {
+                    $query->where('jenis_kelamin', $jk);
+               });
+            })
+            ->when($type, function ($query) use ($type) {
+                $query->whereHas('user', function ($query) use ($type) {
+                    $query->where('type', $type);
+               });
+            })
             ->paginate(8);
-        return view('school.election.index', compact('data', 'election', 'user'));
+            
+        $jumlah = UserJoinSchool::query()
+        ->with('user')->where('school_id', $data->id)
+        ->count();
+        return view('school.election.index', compact('data', 'election', 'user', 'jumlah'));
     }
 
     public function create()

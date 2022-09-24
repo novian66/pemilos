@@ -26,7 +26,8 @@ class User extends Authenticatable
         'jenis_kelamin',
         'phone',
         'token',
-        'nisn'
+        'nisn',
+        'type'
     ];
 
     /**

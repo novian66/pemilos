@@ -72,14 +72,14 @@ class CandidateController extends Controller
         return redirect()->back()->with('success', 'Candidate Hass Been Deleted');
     }
 
-    public function view($id_candidate)
+    public function view($id,$id_candidate)
     {
         $data = ElectionSchoolCandidate::findOrFail($id_candidate);
         $id_election = ElectionSchool::find($data->election_school_id);
         return view('school.candidate.view', compact('data', 'id_election'));
     }
 
-    public function update(Request $request, $id_candidate)
+    public function update(Request $request, $id, $id_candidate)
     {
         $data = ElectionSchoolCandidate::find($id_candidate);
         $election = ElectionSchool::find($data->election_school_id);
