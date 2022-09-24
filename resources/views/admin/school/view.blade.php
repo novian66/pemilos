@@ -1,6 +1,6 @@
 @extends('layouts.theme.master')
 @section('title')
-    {{ $data->nama }} <br>
+    {{ $data->nama }}
 @endsection
 
 @section('button-header')
