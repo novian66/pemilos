@@ -131,7 +131,7 @@
                     <div class="row mt-3">
                         @forelse ($user as $user_join)
                             <div class="col-md-4">
-                                <div class="card">
+                                <div class="card mb-3">
                                     <div class="card-body p-4 text-center">
                                         <span class="avatar avatar-xl mb-3 avatar-rounded"
                                             style="background-image: url(./static/avatars/000m.jpg)"></span>
