@@ -47,8 +47,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Deskripsi Kandidat</label>
-                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" name="example-textarea-input"
-                                            rows="2" placeholder="Content..">{{ $data->description }}</textarea>
+                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="summernote"
+                                            rows="2" placeholder="Content..">{!! $data->description !!}</textarea>
                                         @error('deskripsi')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -71,6 +71,7 @@
 @section('styles')
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 @endsection
 
 @section('script')
@@ -78,6 +79,7 @@
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script type="text/javascript">
         imgInp.onchange = evt => {
             const [file] = imgInp.files
@@ -85,8 +87,14 @@
                 blah.src = URL.createObjectURL(file)
             }
         }
-        // $(function() {
-        //     $('#datetime').datetimepicker();
-        // });
+        $('#summernote').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 120,
+            toolbar: [
+                ['font', ['bold', 'underline', 'clear']],
+                ['para', ['ul', 'ol', 'paragraph']],
+            ]
+        });
     </script>
 @endsection

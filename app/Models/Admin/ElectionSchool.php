@@ -16,4 +16,9 @@ class ElectionSchool extends Model
     {
         return $this->belongsTo(School::class);
     }
+
+    public function vote()
+    {
+        return $this->hasMany(ElectionVote::class, 'election_school_id', 'id');
+    }
 }

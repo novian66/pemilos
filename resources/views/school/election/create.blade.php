@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Deskripsi Kegiatan</label>
-                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" name="example-textarea-input"
+                                        <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
                                             rows="2" placeholder="Content..">{{ old('deskripsi') }}</textarea>
                                         @error('deskripsi')
                                             <span class="invalid-feedback" role="alert">

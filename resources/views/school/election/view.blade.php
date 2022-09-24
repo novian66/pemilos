@@ -59,7 +59,7 @@
                                         <h3 class="m-0 mb-1">{{ $paslon->nama }}</h3>
                                         <div class="text-muted">Urutan Ke : {{ $paslon->urutan }}</div>
                                         <div class="mt-3">
-                                            {{ $paslon->description }}
+                                            {!! $paslon->description !!}
                                         </div>
                                     </div>
                                     <div class="d-flex">
