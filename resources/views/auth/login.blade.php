@@ -44,7 +44,7 @@
             <div class="hr-text">atau</div>
             <div class="card-body">
                 <div class="text-center text-muted mt-0">
-                    Belum punya akun? <a href="{{ route('register') }}" tabindex="-1">Daftar</a>
+                    Belum punya akun? <a href="#" tabindex="-1">Daftar</a>
                 </div>
             </div>
         </form>

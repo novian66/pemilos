@@ -18,7 +18,11 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
 
 Route::middleware(['auth', 'dontback'])->group(function () {
 
@@ -101,7 +105,6 @@ Route::middleware(['auth', 'dontback'])->group(function () {
 
         Route::get('/export/school', [App\Http\Controllers\School\ExcellController::class, 'export_user'])->name('school.export_user');
         Route::post('/import/user', [App\Http\Controllers\School\ExcellController::class, 'import_user'])->name('school.import_user');
-
     });
 
     // routing users
