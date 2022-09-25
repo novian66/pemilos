@@ -49,6 +49,9 @@ Route::middleware(['auth', 'dontback'])->group(function () {
             Route::get('view/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'view'])->name('school.view');
             Route::delete('view/{id}', [App\Http\Controllers\Admin\SchoolController::class, 'destroy'])->name('school.destroy');
 
+            // history
+            Route::get('history', [App\Http\Controllers\Admin\HistoryController::class, 'index'])->name('history.index');
+
             // election
             Route::get('view/{id}/election', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'create'])->name('election.create');
             Route::post('view/{id}/election', [App\Http\Controllers\Admin\ElectionSchoolController::class, 'store'])->name('election.store');

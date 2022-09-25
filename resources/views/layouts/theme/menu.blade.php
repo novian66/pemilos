@@ -77,7 +77,7 @@
                             <a class="dropdown-item" href="{{ route('school.index') }}">
                                 Manajemen Sekolah
                             </a>
-                            <a class="dropdown-item" href="{{ route('settings') }}">
+                            <a class="dropdown-item" href="{{ route('history.index') }}">
                                 Riwayat Kegiatan
                             </a>
                             <a class="dropdown-item" href="{{ route('kpu.api') }}">
