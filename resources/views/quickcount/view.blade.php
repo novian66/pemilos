@@ -28,8 +28,8 @@
                     <h2 class="page-title mb-3">
                         {{ $election->title }}
                     </h2>
-                    @foreach ($list_candidate as $item)
-                        <div class="card">
+                    @foreach ($list_candidate as $key =>  $item)
+                        <div class="card {{ $key != 0 ? 'mt-3' : ''}}">
                             <div class="card-header">
                                 <div>
                                     <div class="row align-items-center">
@@ -107,19 +107,22 @@
             var get_total = document.getElementById('totalChart').getContext('2d');
             const suara_masuk = JSON.parse(`<?php echo $suara_masuk; ?>`);
             const total_pemilih = JSON.parse(`<?php echo $total_pemilih; ?>`);
+            const pria = JSON.parse(`<?php echo $pria; ?>`);
+            const wanita = JSON.parse(`<?php echo $wanita; ?>`);
 
             // The data for our dataset
             const data_total = {
-                labels: ['Total Pemilih', 'Suara Masuk'],
+                labels: ['Total Pemilih', 'Suara Masuk', 'Laki - Laki', 'Perempuan'],
                 datasets: [{
                     label: 'My First Dataset',
                     data: [
-                        total_pemilih, suara_masuk
+                        total_pemilih, suara_masuk, pria, wanita
                     ],
                     backgroundColor: [
-                        '#00a950',
-                        '#58595b',
-                        '#8549ba'
+                        '#f67019',
+                        '#f53794',
+                        '#537bc4',
+                        '#acc236',
                     ],
                     hoverOffset: 4
                 }]

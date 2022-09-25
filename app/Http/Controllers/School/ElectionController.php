@@ -121,24 +121,24 @@ class ElectionController extends Controller
         // dd($request->all());
         $school = School::where(['user_id' => auth()->user()->id])->first();
         // // dd($id);
-        // if (empty($school)) {
-        //     # code...
-        //     return redirect()->route('election-school')->with('error', 'School Not Found');
-        // }
+        if (empty($school)) {
+            # code...
+            return redirect()->route('election-school')->with('error', 'School Not Found');
+        }
 
-        // $election = ElectionSchool::find($id);
-        // if (empty($election)) {
-        //     # code...
-        //     return redirect()->route('election-school')->with('error', 'Election Not Found');
-        // }
+        $election = ElectionSchool::find($id);
+        if (empty($election)) {
+            # code...
+            return redirect()->route('election-school')->with('error', 'Election Not Found');
+        }
 
-        // $request->validate([
-        //     'title' => 'required',
-        //     'deskripsi' => 'required',
-        //     'start' => 'required',
-        //     'end' => 'required',
-        //     'image' => 'image|mimes:png,jpg'
-        // ]);
+        $request->validate([
+            'title' => 'required',
+            'deskripsi' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'image' => 'image|mimes:png,jpg'
+        ]);
 
         $status = 'disable';
         if ($request->status == "on") {
@@ -146,34 +146,33 @@ class ElectionController extends Controller
             $status = 'enable';
         }
 
-        // if ($request->image) {
-        //     # code...
-        //     unlink(public_path('dist/img/election' . $election->image));
+        if ($request->image) {
+            # code...
+            unlink(public_path('dist/img/election' . $election->image));
 
-        //     $ImageName = time() . '.' . $request->image->extension();
+            $ImageName = time() . '.' . $request->image->extension();
 
-        //     $election->update([
-        //         'school_id' => $school->id,
-        //         'title' => $request->title,
-        //         'deskripsi' => $request->deskripsi,
-        //         'start' => $request->start,
-        //         'end' => $request->end,
-        //         'image' => $ImageName,
-        //         'status' => $status
-        //     ]);
+            $election->update([
+                'school_id' => $school->id,
+                'title' => $request->title,
+                'deskripsi' => $request->deskripsi,
+                'start' => $request->start,
+                'end' => $request->end,
+                'image' => $ImageName,
+                'status' => $status
+            ]);
 
-        //     $request->image->move(public_path('dist/img/election/'), $ImageName);
-        // }
-
-        ElectionSchool::find($id)->update([
-            'school_id' => $school->id,
-            'title' => $request->title,
-            'deskripsi' => $request->deskripsi,
-            'start' => $request->start,
-            'end' => $request->end,
-            'status' => $status
-        ]);
-
+            $request->image->move(public_path('dist/img/election/'), $ImageName);
+        }else {
+            ElectionSchool::find($id)->update([
+                'school_id' => $school->id,
+                'title' => $request->title,
+                'deskripsi' => $request->deskripsi,
+                'start' => $request->start,
+                'end' => $request->end,
+                'status' => $status
+            ]);
+        }
         return redirect()->route('lihat-election', $school->id)->with('success', 'Election Hass Been Update');
     }
 
