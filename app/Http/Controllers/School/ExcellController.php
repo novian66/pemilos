@@ -52,7 +52,7 @@ class ExcellController extends Controller
             $token = (new RandomStringGenerator)->generate(6);
             $user = User::create([
                 'name' => $line['NAME'],
-                'email' => $line['NISN'] . "@" . str_replace(' ', '', $line['SCHOOL']) . ".ac.id",
+                'email' => $line['NISN/NIP'] . "@" . str_replace(' ', '', $line['SCHOOL']) . ".ac.id",
                 'password' => Hash::make($token),
                 'token' => $token,
                 'nisn' => $line['NISN/NIP'],
