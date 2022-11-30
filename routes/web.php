@@ -90,6 +90,13 @@ Route::middleware(['auth', 'dontback'])->group(function () {
         Route::patch('', [App\Http\Controllers\School\IndexController::class, 'update'])->name('update-sekolah');
         Route::delete('', [App\Http\Controllers\School\IndexController::class, 'destroy'])->name('hapus-sekolah');
 
+        Route::get('/group', [App\Http\Controllers\School\GroupController::class, 'index'])->name('group-school');
+        Route::get('/group/create', [App\Http\Controllers\School\GroupController::class, 'create'])->name('buat-group');
+        Route::post('/group', [App\Http\Controllers\School\GroupController::class, 'store'])->name('simpan-group');
+        Route::get('/group/{id}', [App\Http\Controllers\School\GroupController::class, 'view'])->name('lihat-group');
+        Route::patch('/group/{id}', [App\Http\Controllers\School\GroupController::class, 'update'])->name('ganti');
+        Route::delete('/group/{id}', [App\Http\Controllers\School\GroupController::class, 'destroy'])->name('hapus-group');
+
         Route::get('/view', [App\Http\Controllers\School\ElectionController::class, 'index'])->name('election-school');
         Route::get('/election', [App\Http\Controllers\School\ElectionController::class, 'create'])->name('buat-election');
         Route::post('/election', [App\Http\Controllers\School\ElectionController::class, 'store'])->name('simpan-election');
