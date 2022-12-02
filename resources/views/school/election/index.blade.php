@@ -292,7 +292,7 @@
                             <input type="text" name="school" value="{{ $data->nama }}" hidden>
                         </div>
                         <div class="form-footer text-center">
-                            <a href="{{ url('dist/excell/excell_user.xlsx') }}" class="btn btn-warning">Unduh Sampel</a>
+                            <a href="{{ url('dist/excel/template_import_user.xlsx') }}" class="btn btn-warning">Unduh Sampel</a>
                             <button type="submit" class="btn btn-secondary ms-3">Submit</button>
                         </div>
                     </form>
