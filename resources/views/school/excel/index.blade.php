@@ -25,6 +25,7 @@
                 <div class="col-md-12">
                     <form class="card" action="{{ route('school.store-user-excel') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <textarea style="display:none" name="data_json">{{ $data_json }}</textarea>
                       <div class="card-header">
                         <h3 class="card-title">Group</h3>
                       </div>
@@ -56,12 +57,19 @@
                             @foreach ($data as $val)
                             <tr>
                                 <td>{{ $val['number'] }}</td>
-                                <td><input class="form-control" readonly name='data[{{$val['number']}}][domain]' value="{{ $val['domain'] }}" ></td>
+                                {{-- <td><input class="form-control" readonly name='data[{{$val['number']}}][domain]' value="{{ $val['domain'] }}" ></td>
                                 <td><span class="badge {{ $val['is_user_type_available_status_color'] }}">{{ $val['is_user_type_available_status_name'] }}</span> <input class="form-control" readonly name='data[{{$val['number']}}][user_type]' value="{{ $val['user_type'] }}" ></td>
                                 <td><span class="badge {{ $val['is_user_group_available_status_color'] }}">{{ $val['is_user_group_available_status_name'] }}</span><input class="form-control" readonly name='data[{{$val['number']}}][user_group]' value="{{ $val['user_group'] }}" ></td>
                                 <td><span class="badge {{ $val['is_not_duplicate_status_color'] }}">{{ $val['is_not_duplicate_status_name'] }}</span><input class="form-control" readonly name='data[{{$val['number']}}][number_id]' value="{{ $val['number_id'] }}" ></td>
                                 <td><input class="form-control" readonly name='data[{{$val['number']}}][name]' value="{{ $val['name'] }}" ></td>
-                                <td><span class="badge {{ $val['is_gendre_available_status_color'] }}">{{ $val['is_gendre_available_status_name'] }}</span><input class="form-control" readonly name='data[{{$val['number']}}][gendre]' value="{{ $val['gendre'] }}" ></td>
+                                <td><span class="badge {{ $val['is_gendre_available_status_color'] }}">{{ $val['is_gendre_available_status_name'] }}</span><input class="form-control" readonly name='data[{{$val['number']}}][gendre]' value="{{ $val['gendre'] }}" ></td> --}}
+                                <td>{{ $val['domain'] }}</td>
+                                <td><span class="badge {{ $val['is_user_type_available_status_color'] }}">{{ $val['is_user_type_available_status_name'] }}</span> {{ $val['user_type'] }}</td>
+                                <td><span class="badge {{ $val['is_user_group_available_status_color'] }}">{{ $val['is_user_group_available_status_name'] }}</span>{{ $val['user_group'] }}</td>
+                                <td><span class="badge {{ $val['is_not_duplicate_status_color'] }}">{{ $val['is_not_duplicate_status_name'] }}</span>{{ $val['number_id'] }}</td>
+                                <td>{{ $val['name'] }}</td>
+                                <td><span class="badge {{ $val['is_gendre_available_status_color'] }}">{{ $val['is_gendre_available_status_name'] }}</span>{{ $val['gendre'] }}</td>
+                            
                             </tr>
                             @endforeach
                         </table>

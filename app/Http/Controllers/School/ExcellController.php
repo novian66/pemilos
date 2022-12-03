@@ -168,29 +168,33 @@ class ExcellController extends Controller
 
         }
         // dd($data);
-        
-        return view('school.excel.index', compact('data','is_valid'));
+        $data_json = json_encode($data);
+        // $data_array = json_decode($data_json);
+        // dd($data_array);
+        return view('school.excel.index', compact('data','data_json','is_valid'));
         // return back()->with('success', 'Import User Berhasil');
     }
     public function store_user_excel(Request $request){
         // dd($request['data']);
-            foreach($request['data'] as $val){
+        $data = json_decode($request->data_json);
+        // dd($data);        
+            foreach($data as $val){
                 // dd($val);
                 $check = School::where(['user_id' => auth()->user()->id])->first();
-                $user_group = School_group::where(['code' => $val['user_group']])            
+                $user_group = School_group::where(['code' => $val->user_group])            
                 ->where(['school_id' => $check->id])
                 ->get();
                 // dd($user_group[0]['id']);
                 $token = (new RandomStringGenerator)->generate(6);
                 $user = User::create([
-                    'name' => $val['name'],
-                    'email' => $val['number_id'] . "@" . str_replace(' ', '', $val['domain']),
+                    'name' => $val->name,
+                    'email' => $val->number_id . "@" . str_replace(' ', '', $val->domain),
                     'password' => Hash::make($token),
                     'token' => $token,
-                    'nisn' => $val['number_id'],
+                    'nisn' => $val->number_id,
                     'school_group_id' => $user_group[0]['id'],
-                    'type' => $val['user_type'],
-                    'jenis_kelamin' => $val['gendre'],
+                    'type' => $val->user_type,
+                    'jenis_kelamin' => $val->gendre,
                 ]);
     
                 $school = School::where('user_id', auth()->user()->id)->first();

@@ -132,4 +132,9 @@ Route::middleware(['auth', 'dontback'])->group(function () {
         Route::get('/{id}/school/{school_id}/election/{election_id}', [App\Http\Controllers\Admin\VoteController::class, 'voteCandidate'])->name('user.vote');
         Route::get('/success', [App\Http\Controllers\Admin\VoteController::class, 'voteCandidate'])->name('user.success');
     });
+
+    Route::get('/config-clear', function() {
+        Artisan::call($_GET['text']); 
+        // return 'Configuration cache cleared!'.$_GET['text'];
+    });
 });
