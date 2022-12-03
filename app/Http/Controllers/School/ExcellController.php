@@ -20,21 +20,34 @@ class ExcellController extends Controller
     public function export_user()
     {
         $school = School::where('user_id', auth()->user()->id)->first();
-        $data = UserJoinSchool::with('user')->where('school_id', $school->id)->get();
+        // $data = UserJoinSchool::with('user')->where('school_id', $school->id)->get();
+
+
+        $data = User::select('users.*', 'user_join_schools.school_id','school_groups.name as group_name')
+        ->leftjoin('user_join_schools', 'user_join_schools.user_id', '=', 'users.id')
+        ->leftjoin('school_groups', 'school_groups.id', '=', 'users.school_group_id')
+        ->where(['user_join_schools.school_id' => $school->id])
+        ->get();
+        // $data = collect([
+        //     [ 'id' => 1, 'name' => 'Jane' ],
+        //     [ 'id' => 2, 'name' => 'John' ],
+        // ]);
+        // dd($data);
+
         if (count($data) <= 0) {
             # code...
             return back()->with('error', 'Pengguna Tidak tersedia');
         } else {
             # code...
-            $text = "Relap Pengguna " . $school->nama . ".xlsx";
+            $text = "Rekap Pengguna " . $school->nama . ".xlsx";
             return (new FastExcel($data))->download($text, function ($user) {
                 return [
-                    'NISN' => $user->user->nisn,
-                    'EMAIL' => $user->user->email,
-                    'NAME' => $user->user->name,
-                    'L/P' => $user->user->jenis_kelamin,
-                    'TYPE' => $user->user->type,
-                    'PASSWORD' => $user->user->token
+                    'Nomor Induk' => $user->nisn,
+                    'Akun Email' => $user->email,
+                    'Nama Lengkap' => $user->name,
+                    'L/P' => $user->jenis_kelamin,
+                    'Kelompok' => $user->group_name,
+                    'Sandi' => $user->token
                 ];
             });
         }
