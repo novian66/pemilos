@@ -12,31 +12,34 @@
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                   <div class="btn-list">
-                    <a href="{{ route('create-group') }}" class="btn btn-primary d-none d-sm-inline-block">
-                      Group Baru
-                    </a>
+
                   </div>
                 </div>
               </div>
-              @if(session()->has('message'))
-              <div class="alert alert-success">
-                {{ session()->get('message')}}
-            </div>
-            @endif
+
 
             <div class="row">
 
 
 
                 <div class="col-md-12">
-                    <form class="card" action="{{ route('store-user-excel') }}" method="POST" enctype="multipart/form-data">
+                    <form class="card" action="{{ route('school.store-user-excel') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                       <div class="card-header">
                         <h3 class="card-title">Group</h3>
-                        <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
                       <div class="card-body">
-                        
+                        @if($is_valid=='false')
+                        <div class="alert alert-warning">
+                          Data Tidak Valid Untuk Import
+                        </div>
+                        @endif
+                        @if($is_valid=='true')
+                        <div class="alert alert-success">
+                          Data Sudah Valid Untuk Import
+                          <button type="input" class="btn btn-success">Import</button>
+                        </div>
+                        @endif
                         <table class="table table-responsive table-hover">
                             <thead>
                             <tr>
@@ -54,11 +57,11 @@
                             <tr>
                                 <td>{{ $val['number'] }}</td>
                                 <td><input class="form-control" readonly name='data[{{$val['number']}}][domain]' value="{{ $val['domain'] }}" ></td>
-                                <td><span class="badge {{ $val['is_not_duplicate_status_color'] }}">{{ $val['is_not_duplicate_status_name'] }}</span> <input class="form-control" readonly name='data[{{$val['number']}}][user_type]' value="{{ $val['user_type'] }}" ></td>
+                                <td><span class="badge {{ $val['is_user_type_available_status_color'] }}">{{ $val['is_user_type_available_status_name'] }}</span> <input class="form-control" readonly name='data[{{$val['number']}}][user_type]' value="{{ $val['user_type'] }}" ></td>
                                 <td><span class="badge {{ $val['is_user_group_available_status_color'] }}">{{ $val['is_user_group_available_status_name'] }}</span><input class="form-control" readonly name='data[{{$val['number']}}][user_group]' value="{{ $val['user_group'] }}" ></td>
-                                <td><span class="badge {{ $val['is_user_type_available_status_color'] }}">{{ $val['is_user_type_available_status_name'] }}</span><input class="form-control" readonly name='data[{{$val['number']}}][number_id]' value="{{ $val['number_id'] }}" ></td>
-                                <td><input class="form-control" readonly name='data[{{$val['name']}}][number_id]' value="{{ $val['name'] }}" ></td>
-                                <td><span class="badge {{ $val['is_gendre_available_status_color'] }}">{{ $val['is_gendre_available_status_name'] }}</span><input class="form-control" readonly name='data[{{$val['gendre']}}][number_id]' value="{{ $val['gendre'] }}" ></td>
+                                <td><span class="badge {{ $val['is_not_duplicate_status_color'] }}">{{ $val['is_not_duplicate_status_name'] }}</span><input class="form-control" readonly name='data[{{$val['number']}}][number_id]' value="{{ $val['number_id'] }}" ></td>
+                                <td><input class="form-control" readonly name='data[{{$val['number']}}][name]' value="{{ $val['name'] }}" ></td>
+                                <td><span class="badge {{ $val['is_gendre_available_status_color'] }}">{{ $val['is_gendre_available_status_name'] }}</span><input class="form-control" readonly name='data[{{$val['number']}}][gendre]' value="{{ $val['gendre'] }}" ></td>
                             </tr>
                             @endforeach
                         </table>

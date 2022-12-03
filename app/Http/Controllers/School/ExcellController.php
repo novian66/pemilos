@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class ExcellController extends Controller
 {
@@ -78,6 +79,8 @@ class ExcellController extends Controller
         $data = array();
         // dd($collection);
         $check = School::where(['user_id' => auth()->user()->id])->first();
+        // dd($check);
+        $is_valid = 'true';
         for($a=0;$a<count($collection);$a++){
             $data[$a] = $collection[$a];
             $data[$a]['number'] = $a+2;
@@ -86,10 +89,10 @@ class ExcellController extends Controller
             $user = User::select('users.*', 'user_join_schools.school_id')
             ->leftjoin('user_join_schools', 'user_join_schools.user_id', '=', 'users.id')
             ->where(['nisn' => $collection[$a]['number_id']])
-            ->where(['school_id' => $check->school_id])
+            ->where(['school_id' => $check->id])
             ->get();
-
-            if(!empty($user)){
+            
+            if(!isset(($user[0]))){
             $data[$a]['is_not_duplicate'] = 'true';
             $data[$a]['is_not_duplicate_status_name'] = '';
             $data[$a]['is_not_duplicate_status_color'] = '';    
@@ -98,14 +101,16 @@ class ExcellController extends Controller
             $data[$a]['is_not_duplicate'] = 'false';
             $data[$a]['is_not_duplicate_status_name'] = 'error';
             $data[$a]['is_not_duplicate_status_color'] = 'bg-red';
+            $is_valid = 'false';
             }
-            
+            // DB::enableQueryLog();
             //check user_group
             $user_group = School_group::where(['code' => $collection[$a]['user_group']])
-            ->where(['school_id' => $check->school_id])
+            ->where(['school_id' => $check->id])
             ->get();
-
-            if(!empty($user_group))
+            // dd(DB::getQueryLog());
+            // dd($user_group);
+            if(isset(($user_group[0])))
             {
                 $data[$a]['is_user_group_available'] = 'true';
                 $data[$a]['is_user_group_available_status_name'] = '';
@@ -116,6 +121,7 @@ class ExcellController extends Controller
             $data[$a]['is_user_group_available'] = 'false';
             $data[$a]['is_user_group_available_status_name'] = 'error';
             $data[$a]['is_user_group_available_status_color'] = 'bg-red';
+            $is_valid = 'false';
             }
 
             if($collection[$a]['user_type']=='siswa' or $collection[$a]['user_type']=='guru')
@@ -129,6 +135,7 @@ class ExcellController extends Controller
             $data[$a]['is_user_type_available'] = 'false';
             $data[$a]['is_user_type_available_status_name'] = 'error';
             $data[$a]['is_user_type_available_status_color'] = 'bg-red';
+            $is_valid = 'false';
             }            
 
             if($collection[$a]['gendre']=='L' or $collection[$a]['gendre']=='P'){
@@ -142,12 +149,48 @@ class ExcellController extends Controller
             $data[$a]['is_gendre_available'] = 'false';
             $data[$a]['is_gendre_available_status_name'] = 'error';
             $data[$a]['is_gendre_available_status_color'] = 'bg-red';
+            $is_valid = 'false';
             } 
 
 
         }
         // dd($data);
-        return view('school.excel.index', compact('data'));
+        
+        return view('school.excel.index', compact('data','is_valid'));
         // return back()->with('success', 'Import User Berhasil');
+    }
+    public function store_user_excel(Request $request){
+        // dd($request['data']);
+            foreach($request['data'] as $val){
+                // dd($val);
+                $check = School::where(['user_id' => auth()->user()->id])->first();
+                $user_group = School_group::where(['code' => $val['user_group']])            
+                ->where(['school_id' => $check->id])
+                ->get();
+                // dd($user_group[0]['id']);
+                $token = (new RandomStringGenerator)->generate(6);
+                $user = User::create([
+                    'name' => $val['name'],
+                    'email' => $val['number_id'] . "@" . str_replace(' ', '', $val['domain']),
+                    'password' => Hash::make($token),
+                    'token' => $token,
+                    'nisn' => $val['number_id'],
+                    'school_group_id' => $user_group[0]['id'],
+                    'type' => $val['user_type'],
+                    'jenis_kelamin' => $val['gendre'],
+                ]);
+    
+                $school = School::where('user_id', auth()->user()->id)->first();
+                $role = Role::whereName('student')->first();
+                $permission = Permission::where(['name' => 'student-access'])->pluck('id');
+                $role->syncPermissions($permission);
+                $user->assignRole([$role->id]);
+                UserJoinSchool::create([
+                    'user_id' => $user->id,
+                    'school_id' => $school->id,
+                    'status' => 'enable'
+                ]);                
+            }
+            return redirect(route('election-school'));
     }
 }

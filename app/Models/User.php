@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'birthday',
         'jenis_kelamin',
+        'school_group_id',
         'phone',
         'token',
         'nisn',

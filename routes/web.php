@@ -115,6 +115,7 @@ Route::middleware(['auth', 'dontback'])->group(function () {
 
         Route::get('/export/school', [App\Http\Controllers\School\ExcellController::class, 'export_user'])->name('school.export_user');
         Route::post('/import/user', [App\Http\Controllers\School\ExcellController::class, 'import_user'])->name('school.import_user');
+        Route::post('/import/store_user', [App\Http\Controllers\School\ExcellController::class, 'store_user_excel'])->name('school.store-user-excel');
     });
 
     // routing users
