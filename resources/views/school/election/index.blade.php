@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between mb-1">
-                                    <small>Progress Pemilu</small>
+                                    <small>Progress Pemilu <a href="{{route('participant.index',$elec->id)}}"><small class="badge bg-blue-lt">Lihat Detail</small></a></small>                                    
                                     <small>{{ $elec->vote->count() }}/{{ $jumlah }}</small>
                                 </div>
                                 @php
