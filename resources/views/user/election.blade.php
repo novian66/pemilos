@@ -24,9 +24,10 @@
                                             <h3 class="m-0 mb-1">{{ $item->nama }}</h3>
                                             <div class="text-muted">{!! $item->description !!}</div>
                                         </div>
-                                        @if($is_open=='true')
+                                        
                                         
                                         <div class="d-flex">
+                                            @if($is_open=='true')
                                             <a href="javascript:void(0)"
                                                 action="{{ route('user.vote', ['id' => $item->id, 'school_id' => $item->school_id, 'election_id' => $item->election_school_id]) }}"
                                                 onclick="votePaslon(this)" class="card-btn text-primary">
@@ -43,9 +44,10 @@
                                                 </svg>
                                                 Vote
                                             </a>
+                                            @endif
                                         </div>
                                     </div>
-                                    @endif
+                                    
                                 </div>
                             @empty
                                 @include('layouts.theme.empty')
