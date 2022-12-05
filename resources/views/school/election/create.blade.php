@@ -37,7 +37,7 @@
                                             <div class="form-group mb-3 ">
                                                 <label class="form-label">Tanggal Mulai</label>
                                                 <div>
-                                                    <input type="date" min="{{date('Y-m-d')}}"
+                                                    <input type="date" 
                                                         class="form-control @error('start') is-invalid @enderror"
                                                         value="{{ old('start') }}" name="start" id="datetime">
                                                     @error('start')
@@ -66,7 +66,7 @@
                                             <div class="form-group mb-3 ">
                                                 <label class="form-label">Tanggal Selesai</label>
                                                 <div>
-                                                    <input type="date" min="{{date('Y-m-d')}}"
+                                                    <input type="date" 
                                                         class="form-control @error('end') is-invalid @enderror"
                                                         value="{{ old('end') }}" name="end" id="datetime">
                                                     @error('end')
