@@ -2,11 +2,15 @@
 @section('title')
     Kandidat
 @endsection
-
 @section('content')
     <div class="page-body">
         <div class="container-xl">
             <div class="row">
+                    @if($message!='')
+                    <div class="alert alert-warning">
+                      {{$message}}
+                    </div>
+                    @endif
                 <div class="page-body">
                     <div class="container-xl">
                         <div class="row">
@@ -20,6 +24,8 @@
                                             <h3 class="m-0 mb-1">{{ $item->nama }}</h3>
                                             <div class="text-muted">{!! $item->description !!}</div>
                                         </div>
+                                        @if($is_open=='true')
+                                        
                                         <div class="d-flex">
                                             <a href="javascript:void(0)"
                                                 action="{{ route('user.vote', ['id' => $item->id, 'school_id' => $item->school_id, 'election_id' => $item->election_school_id]) }}"
@@ -39,6 +45,7 @@
                                             </a>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             @empty
                                 @include('layouts.theme.empty')

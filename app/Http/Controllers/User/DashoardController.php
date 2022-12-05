@@ -9,6 +9,8 @@ use App\Models\Admin\ElectionSchoolCandidate;
 use App\Models\Admin\School;
 use App\Models\Admin\UserJoinElection;
 use App\Models\Admin\UserJoinSchool;
+use App\Models\Admin\ElectionVote;
+
 use Illuminate\Http\Request;
 
 class DashoardController extends Controller
@@ -83,8 +85,40 @@ class DashoardController extends Controller
     }
 
     public function showEventCandidate(Request $request, $election_school_id)
-    {
+    {   
+        $is_open = 'true';
+        $message = '';
+        $datenow = strtotime(date('Y-m-d'));
+        $election = ElectionSchool::where('id', $election_school_id)->get();
+        $start = strtotime($election[0]['start']);
+        $end = strtotime($election[0]['end']);
         $candidate = ElectionSchoolCandidate::where('election_school_id', $election_school_id)->get();
-        return view('user.election', compact('candidate'));
+        $vote = ElectionVote::where([
+            'user_id' => auth()->user()->id,
+            'election_school_id' => $election_school_id,
+        ])->first();
+        // dd($datenow."|".$end);
+        if ($vote){
+            $is_open = 'false';
+            $message = 'Hai, '.auth()->user()->name.'. Anda Sudah Memilih Pada '.$vote['created_at'];
+        }
+        
+        
+        elseif($datenow>=$start and $datenow<=$end ){
+            $is_open = 'true';
+            $message = '';
+        }
+        elseif($datenow < $start){
+            $is_open = 'false';
+            $message = 'Waktu Pemilihan Belum Dimulai';
+        }
+        elseif($datenow > $end){
+            $is_open = 'false';
+            $message = 'Waktu Pemilihan Telah Berakhir';
+        }    
+        elseif($vote){
+
+        }    
+        return view('user.election', compact('candidate','message', 'is_open'));
     }
 }
