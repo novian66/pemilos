@@ -14,6 +14,7 @@ class VoteController extends Controller
     {
         $vote = ElectionVote::where([
             'user_id' => auth()->user()->id,
+            'election_school_id' => $election_id,
         ])->first();
 
         if ($vote) {
@@ -36,6 +37,6 @@ class VoteController extends Controller
         $dt = new DateTime();
         $date = $dt->format('d-m-Y H:i');
 
-        return view('user.success', compact('eventData', 'candidateData', 'date'));
+        return back()->withInput();
     }
 }
