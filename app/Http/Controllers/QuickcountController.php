@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class QuickcountController extends Controller
 {
+    public function __construct()
+    {
+        $this->electionvote = new ElectionVote();
+    } 
     public function index()
     {
         return view('quickcount.index');
@@ -39,6 +43,7 @@ class QuickcountController extends Controller
             }
 
             $paslon = json_encode($paslon);
+            // dd($paslon);
             $suara = json_encode($suara);
             $suara_masuk = strval(count(ElectionVote::where('election_school_id', $election->id)->get()));
             $total_pemilih = strval(count(UserJoinSchool::where('school_id', $election->school_id)->get()));
@@ -57,7 +62,28 @@ class QuickcountController extends Controller
                 ->where('school_id', $election->school_id)
                 ->get()));
             // dd($pria);
-            return view('quickcount.view', compact('paslon', 'suara', 'list_candidate', 'election', 'suara_masuk', 'total_pemilih', 'pria', 'wanita'));
+            $data = $this->electionvote->recap_by_candidate($election->id);
+            foreach($data as $key=>$val){
+                $recapByCandidate[$val->nama]['total']=0;
+            }              
+            foreach($data as $key=>$val){
+                // $recapByCandidate[$val->nama][$val->groups]=$val->voted;
+                $recapByCandidate[$val->nama]['total']+=$val->voted;
+            }            
+            foreach($data as $key=>$val){
+                // $recapByCandidate[$val->nama][$val->groups]=$val->voted;
+                $recapByCandidate[$val->nama]['id-chart']=str_replace(' ', '', $val->nama);
+                $recapByCandidate[$val->nama]['data']['name'][]=$val->groups." ".round((($val->voted/$recapByCandidate[$val->nama]['total'])*100),2)."% ";
+                $recapByCandidate[$val->nama]['data']['voted'][]=$val->voted;
+            }
+
+            foreach($recapByCandidate as $key=>$val){
+                $recapByCandidate[$key]['data_name_json']=json_encode($val['data']['name']);
+                $recapByCandidate[$key]['data_voted_json']=json_encode($val['data']['voted']);
+            }
+
+            // dd($recapByCandidate);
+            return view('quickcount.view', compact('recapByCandidate','paslon', 'suara', 'list_candidate', 'election', 'suara_masuk', 'total_pemilih', 'pria', 'wanita'));
         } else {
             return redirect()->route('quickcount')->with('error', 'Pemilihan Belum Selesai');
         }
