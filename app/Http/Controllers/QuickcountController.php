@@ -69,17 +69,22 @@ class QuickcountController extends Controller
             foreach($data as $key=>$val){
                 // $recapByCandidate[$val->nama][$val->groups]=$val->voted;
                 $recapByCandidate[$val->nama]['total']+=$val->voted;
-            }            
+            }           
+            // $rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+            // $rand[rand(0,15)];
             foreach($data as $key=>$val){
+                $color = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
                 // $recapByCandidate[$val->nama][$val->groups]=$val->voted;
                 $recapByCandidate[$val->nama]['id-chart']=str_replace(' ', '', $val->nama);
                 $recapByCandidate[$val->nama]['data']['name'][]=$val->groups." ".round((($val->voted/$recapByCandidate[$val->nama]['total'])*100),2)."% ";
                 $recapByCandidate[$val->nama]['data']['voted'][]=$val->voted;
+                $recapByCandidate[$val->nama]['data']['color'][]=$color;
             }
 
             foreach($recapByCandidate as $key=>$val){
                 $recapByCandidate[$key]['data_name_json']=json_encode($val['data']['name']);
                 $recapByCandidate[$key]['data_voted_json']=json_encode($val['data']['voted']);
+                $recapByCandidate[$key]['data_color_json']=json_encode($val['data']['color']);
             }
 
             // dd($recapByCandidate);

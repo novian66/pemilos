@@ -143,29 +143,21 @@
                     var {{ $item['id-chart'] }} = document.getElementById('{{ $item["id-chart"] }}').getContext('2d');
                     var name_candidate = JSON.parse(`<?php echo $item['data_name_json']; ?>`); 
                     var voted = JSON.parse(`<?php echo $item['data_voted_json']; ?>`);
+                    var color = JSON.parse(`<?php echo $item['data_color_json']; ?>`);
                     const dataRecapByCandidate{{ $item['id-chart'] }} = {
                         labels: name_candidate,
                         datasets:
                         [{
                             label: 'My First Dataset',
                             data: voted,
-                            backgroundColor: ['#4dc9f6',
-                                '#f67019',
-                                '#f53794',
-                                '#537bc4',
-                                '#acc236',
-                                '#166a8f',
-                                '#00a950',
-                                '#58595b',
-                                '#8549ba'
-                            ],
+                            backgroundColor: color,
                             hoverOffset: 4
                         }]
                     };
 
                     var chart = new Chart({{ $item['id-chart'] }}, {
                         // The type of chart we want to create
-                        type: 'doughnut',
+                        type: 'pie',
                         data: dataRecapByCandidate{{ $item['id-chart'] }},
                         // Configuration options
                         options: {
