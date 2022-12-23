@@ -76,7 +76,12 @@ class QuickcountController extends Controller
                 $color = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
                 // $recapByCandidate[$val->nama][$val->groups]=$val->voted;
                 $recapByCandidate[$val->nama]['id-chart']=str_replace(' ', '', $val->nama);
-                $recapByCandidate[$val->nama]['data']['name'][]=$val->groups." ".round((($val->voted/$recapByCandidate[$val->nama]['total'])*100),2)."% ";
+                if($recapByCandidate[$val->nama]['total']==0){
+                    $recapByCandidate[$val->nama]['data']['name'][]=$val->groups." 0% ";
+                }
+                else{
+                    $recapByCandidate[$val->nama]['data']['name'][]=$val->groups." ".round((($val->voted/$recapByCandidate[$val->nama]['total'])*100),2)."% ";
+                }
                 $recapByCandidate[$val->nama]['data']['voted'][]=$val->voted;
                 $recapByCandidate[$val->nama]['data']['color'][]=$color;
             }
