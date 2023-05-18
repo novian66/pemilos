@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Admin\CandidateElectionController;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ElectionSchool;
@@ -18,8 +18,17 @@ class DashoardController extends Controller
     public function index()
     {
         $school = UserJoinSchool::with('school')->where('user_id', auth()->user()->id)->get();
+        // dd(bcrypt(auth()->user()->password));
+        // auth()->user()->password;
+        // auth()->user()->birday;
+        // dd(str_replace("-","",auth()->user()->birthday));
+        $is_cannot_vote = (Hash::check(str_replace("-","",auth()->user()->birthday), auth()->user()->password));
+        // {
+        //     // The passwords match...
+        // }
 
-        return view('user.dashboard', compact('school'));
+
+        return view('user.dashboard', compact('school','is_cannot_vote'));
     }
 
     public function joinSchool(Request $request)
@@ -51,16 +60,22 @@ class DashoardController extends Controller
 
     public function editProfile(Request $request)
     {
-        $user = auth()->user();
-        $user->name = $request->nama;
-        $user->jenis_kelamin = $request->jenis_kelamin;
-        $user->phone = $request->phone;
-        $user->birthday = $request->birthday;
-        if ($request->password) {
-            $user->password = bcrypt($request->password);
+        if(str_replace("-","",$request->birthday)!==$request->password){
+            $user = auth()->user();
+            $user->name = $request->nama;
+            $user->jenis_kelamin = $request->jenis_kelamin;
+            $user->phone = $request->phone;
+            // $user->birthday = $request->birthday;
+            if ($request->password) {
+                $user->password = bcrypt($request->password);
+            }
+            $user->save();
+            return redirect()->route('dashboard')->with('success', 'Sukses!');
         }
-        $user->save();
-        return redirect()->route('dashboard')->with('success', 'Sukses!');
+        else{
+            return redirect()->route('dashboard')->with('error', 'Password tidak boleh sama dengan tanggal lahir!');
+        }
+
     }
 
     public function showSchoolEvent(Request $request)

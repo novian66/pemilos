@@ -164,6 +164,23 @@ class ExcellController extends Controller
             $data[$a]['is_gendre_available_status_color'] = 'bg-red';
             $is_valid = 'false';
             } 
+            //cek format tgl lahir
+            $data[$a]['is_birthday_format'] = 'true';
+            $data[$a]['is_birthday_format_status_name'] = '';
+            $data[$a]['is_birthday_format_status_color'] = '';
+            if(!empty($collection[$a]['birthday'])){
+                if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$collection[$a]['birthday'])) {
+                    $data[$a]['is_birthday_format'] = 'true';
+                    $data[$a]['is_birthday_format_status_name'] = '';
+                    $data[$a]['is_birthday_format_status_color'] = '';
+                } else {
+                    $data[$a]['is_birthday_format'] = 'false';
+                    $data[$a]['is_birthday_format_status_name'] = 'error';
+                    $data[$a]['is_birthday_format_status_color'] = 'bg-red';
+                    $is_valid = 'false';
+                }
+
+            }
 
 
         }
@@ -185,11 +202,18 @@ class ExcellController extends Controller
                 ->where(['school_id' => $check->id])
                 ->get();
                 // dd($user_group[0]['id']);
-                $token = (new RandomStringGenerator)->generate(6);
+                if(!empty($val->birthday)){
+                    $token = str_replace("-","",$val->birthday);
+                }
+                else{
+                    $val->birthday = null;
+                    $token = (new RandomStringGenerator)->generate(6);
+                }
                 $user = User::create([
                     'name' => $val->name,
                     'email' => $val->number_id . "@" . str_replace(' ', '', $val->domain),
                     'password' => Hash::make($token),
+                    'birthday' => $val->birthday,
                     'token' => $token,
                     'nisn' => $val->number_id,
                     'school_group_id' => $user_group[0]['id'],

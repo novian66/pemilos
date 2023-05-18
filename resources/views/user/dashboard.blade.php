@@ -40,7 +40,18 @@
                                     </div>
                                     <div class="d-flex">
                                         <a href="#" class="card-btn" data-bs-toggle="modal"
-                                            data-bs-target="#modal-token">
+                                            data-bs-target="
+                                            
+                                            <?php
+                                            if($is_cannot_vote){
+                                                echo '';
+                                            }   
+                                            else{
+                                                echo '#modal-token';
+                                            }
+                                        ?>
+                                            
+                                            ">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye me-2"
                                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
                                                 stroke="currentColor" fill="none" stroke-linecap="round"
@@ -51,7 +62,15 @@
                                                     d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7">
                                                 </path>
                                             </svg>
-                                            Lihat Kegiatan
+                                            <?php
+                                                if($is_cannot_vote){
+                                                    echo 'Ganti Password Untuk Dapat Memilih';
+                                                }   
+                                                else{
+                                                    echo 'Lihat Kegiatan';
+                                                }
+                                            ?>
+                                            
                                         </a>
                                     </div>
                                 </div>

@@ -51,6 +51,7 @@
                                 <td>Number ID</td>
                                 <td>Name</td>
                                 <td>Gendre</td>
+                                <td>birthday</td>
                             </tr>
                         </thead>
 
@@ -69,6 +70,7 @@
                                 <td><span class="badge {{ $val['is_not_duplicate_status_color'] }}">{{ $val['is_not_duplicate_status_name'] }}</span>{{ $val['number_id'] }}</td>
                                 <td>{{ $val['name'] }}</td>
                                 <td><span class="badge {{ $val['is_gendre_available_status_color'] }}">{{ $val['is_gendre_available_status_name'] }}</span>{{ $val['gendre'] }}</td>
+                                <td><span class="badge {{ $val['is_birthday_format_status_color'] }}">{{ $val['is_birthday_format_status_name'] }}</span>{{ $val['birthday'] }}</td>
                             
                             </tr>
                             @endforeach
