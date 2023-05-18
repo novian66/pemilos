@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+
+
+Route::get('/', [App\Http\Controllers\User\LandingController::class, 'index'])->name('landing');
 
 Auth::routes([
     'register' => false, // Registration Routes...

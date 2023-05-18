@@ -68,7 +68,7 @@
                       <div class="card-body">
                         <div class="row">
                             @foreach ($recapByCandidate as $key =>  $item)
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="mt-3">
                                     <div class="card card-sm p-2">
                                         <canvas id="{{ $item['id-chart'] }}" height="100" width="100"></canvas>
