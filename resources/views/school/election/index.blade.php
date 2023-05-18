@@ -121,7 +121,13 @@
                                     <small>{{ $elec->vote->count() }}/{{ $jumlah }}</small>
                                 </div>
                                 @php
+                                if($jumlah==0){
+                                    $total = 0;
+                                }
+                                else{
                                     $total = (int) (($elec->vote->count() / $jumlah) * 100);
+                                }
+                                    
                                 @endphp
                                 <div class="progress mb-1" style="height: 15px;">
                                     <div class="progress-bar" role="progressbar" style="width: {{ $total }}%;"
