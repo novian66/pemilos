@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Binmp - Responsive HTML 5 template</title>
+    <title>Siballu - Sistem Informasi Banyumas Belajar Pemilu</title>
     <!-- mobile responsive meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -57,7 +57,7 @@
             <div class="collapse navbar-collapse main-navigation mainmenu " id="main-nav-bar">
                 
                 <ul class="nav navbar-nav navigation-box">
-                    <li class="current"> 
+                    {{-- <li class="current"> 
                         <a href="index.html">Home</a> 
                         <ul class="sub-menu">
                             <li><a href="index.html">Home One</a></li>
@@ -83,7 +83,7 @@
                             <li><a href="blog-details.html">Blog Details</a></li>
                         </ul><!-- /.sub-menu -->
                     </li>
-                    <li> <a href="contact.html">Contact</a> </li>
+                    <li> <a href="contact.html">Contact</a> </li> --}}
                 </ul>                
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
@@ -309,7 +309,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 35; white-space: nowrap;text-align: center;">
-                        <h2>Binmp is Just What Your Business Needs.</h2>
+                        <h2>SIBALLU - Sistem Informasi<br /> Banyumas Belajar Pemilu</h2>
                     </div>                    
                     
                     <div class="tp-caption tp-resizeme" 
@@ -329,7 +329,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 35; white-space: nowrap; text-align: center;">
-                        <a href="#" class="banner-btn">Learn More</a>
+                        <a href="/login" class="banner-btn">LOGIN</a>
                     </div>
                 
                 </li>
@@ -439,7 +439,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 35; white-space: nowrap;">
-                        <h2>Discover the <br /> incredible app <br /> features.</h2>
+                        <h2>SIBALLU - Sistem Informasi<br /> Banyumas Belajar Pemilu</h2>
                     </div>                    
                         
                     <div class="tp-caption tp-resizeme" 
@@ -459,7 +459,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 35; white-space: nowrap;">
-                        <a href="#" class="banner-btn">Learn More</a>
+                        <a href="/login" class="banner-btn">LOGIN</a>
                     </div>
                 
                 </li>
@@ -614,7 +614,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 35; white-space: nowrap;">
-                        <h2>Great app that makes <br /> your business easier</h2>
+                        <h2>SIBALLU - Sistem Informasi<br /> Banyumas Belajar Pemilu</h2>
                     </div>
                     
                     <div class="tp-caption" 
@@ -654,7 +654,7 @@
                     data-textalign="['top','top','top','top']"
                     data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},{"delay":"wait","speed":1000,"to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
                     style="z-index: 35; white-space: nowrap;">
-                        <a href="#" class="banner-btn">Learn More</a>
+                        <a href="/login" class="banner-btn">LOGIN</a>
                     </div>
                 
                 </li>
@@ -664,7 +664,7 @@
 </section>
 <!--End Main Slider-->
 
-<section class="features-style-one">
+{{-- <section class="features-style-one">
     <div class="thm-container">
         <div class="title">
             <h3>Amazing features to convince you <br /> to use our application</h3>
@@ -979,10 +979,10 @@
             --><a href="#" class="fab fa-google-plus-g"></a>
         </div><!-- /.social pull-right -->
     </div><!-- /.thm-container clearfix -->
-</div><!-- /.footer-top -->
+</div><!-- /.footer-top --> --}}
 <div class="footer-bottom text-center">
     <div class="thm-container">
-        <p>&copy; copyright 2018 by Layerdrops.com</p>
+        <p>&copy; copyright 2023 IT Telkom Purwokerto</p>
     </div><!-- /.thm-container -->    
 </div><!-- /.footer-bottom -->
 
